@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "实践Spring Data Neo4j"
+title: "实践Neo4j之九Spring Data Neo4j"
 date: 2017-07-07 09:00:00 +0800
 categories: 数据库
 tags: database nosql neo4j spring-data-neo4j
