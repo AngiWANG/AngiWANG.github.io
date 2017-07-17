@@ -22,7 +22,7 @@ github: AngiWANG
 
 # avatar and Favicon
 avatar: /images/avatar.jpg 
-favicon: http://7u2ho6.com1.z0.glb.clouddn.com/site-favicon.ico
+favicon: /images/avatar.ico
 
 # disqus config
 disqus:
@@ -43,7 +43,7 @@ sass:
 
 # Jekyll Plugin
 # https://help.github.com/articles/adding-jekyll-plugins-to-a-github-pages-site/
-gems:
+plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
   - jekyll-feed
