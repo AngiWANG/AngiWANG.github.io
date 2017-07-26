@@ -15,9 +15,9 @@ tags: database nosql neo4j
 (): 代表node(s)
 []: 代表relationShip
 -,->,<-: direction
-identifier：标识符，可选，如果不指定，则表示anonymous，当指定时，()可省略
+identifier：标识符或变量，可选，如果不指定，则表示anonymous，当指定时，()可省略
 label: node的lable，可选，支持多个，例如：(a:User:Admin)
-*n..m: 可选，默认*1，表示一层关系，例如：[:KNOWS*2..5]、[:KNOWS*0..1]、[:KNOWS*..5]、[:KNOWS*]
+*n..m: 设定关系层次，可选，默认*1，表示一层关系，例如：[:KNOWS*2..5]、[:KNOWS*0..1]、[:KNOWS*..5]、[:KNOWS*]
 {map-construct}: 属性过滤，例如：(a {name: 'Andres', sport: 'Brazilian Ju-Jitsu'})
 ```
 
