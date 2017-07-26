@@ -1,10 +1,10 @@
 # Site settings
-title: 王垒的博客
+title: My Home
 email: angi.wang.afe@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
   事在人为，天命难违
 baseurl: "" # the subpath of your site, e.g. /blog/
-# url: http://yansu.org # the base hostname & protocol for your site
+url: http://angi.wang # the base hostname & protocol for your site
 rss_url: /pages/feed.xml
 author: Angi WANG
 
@@ -25,8 +25,8 @@ avatar: /images/avatar.jpg
 favicon: /images/avatar.ico
 
 # disqus config
-disqus:
-  shortname: suyan-zh
+# disqus:
+#  shortname: suyan-zh
 
 # google analytics config
 ga:
