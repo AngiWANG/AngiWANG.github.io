@@ -1,5 +1,5 @@
 # Site settings
-title: My Home
+title: My Space
 email: angi.wang.afe@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
   事在人为，天命难违
@@ -22,7 +22,7 @@ github: AngiWANG
 
 # avatar and Favicon
 avatar: /images/avatar.jpg 
-favicon: /images/avatar.ico
+favicon: /images/favicon.ico
 
 # disqus config
 # disqus:
