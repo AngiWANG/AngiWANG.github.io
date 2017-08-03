@@ -22,7 +22,7 @@ tags: gradle tool maven build
 
 ### 通过包管理器
 
-Unix类可以使用SDKMAN，Mac可以使用Homebrew，Windows可以使用Scoop
+*nix系统可以使用SDKMAN，Mac可以使用Homebrew，Windows可以使用Scoop
 
 ```shell
 $ sdk install gradle 4.0
@@ -156,11 +156,11 @@ repositories {
 }
 ```
 
-
+gradle本地仓库默认路径：${home}/.gradle/caches/modules-2/files-2.1/
 
 ## Gradle Wrapper
 
-Gradle Wrapper的作用是将gradle的版本纳入项目管理中，实现gradle的版本由项目控制，与运行环境无关。通过首次运行时自动下载相应版本的gradle到当前环境实现。不会使用当前环境已安装的gradle。
+Gradle Wrapper的作用是将gradle的版本纳入项目管理中，实现gradle的版本由项目控制，与运行环境无关。首次运行时自动下载相应版本的gradle到当前环境，升级也会非常容易。不会使用当前环境已安装的gradle
 
 ```shell
 # build.gradle中新增如下配置
