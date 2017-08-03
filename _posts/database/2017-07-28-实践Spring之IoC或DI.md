@@ -56,28 +56,37 @@ bean定义
 @Bean(initMethod = "init", destroyMethod = "destory")
 ```
 
+*备注：需要实例容器ctx.registerShutdownHook()，否则destoryMethod不会触发*
+
 ### 样例
 
 SaveVideoInfoDao.java
 
 ```java
-public class SaveVideoInfoDao(){
-	public void init(){
-      
-  	}
-  	public void destory(){
-      
-  	}
+public class SaveVideoInfoDao{
+  	public String hello(String name) {
+		return "hello, " + name;
+	}
+	public void init() {
+		System.out.println("init SaveVideoInfoDao instance");
+	}
+
+	public void destory() {
+		System.out.println("destory SaveVideoInfoDao instance");
+	}
 }
 ```
 
 VideoService.java
 
 ```java
-public class VideoService(){
+public class VideoService{
   	private SaveVideoInfoDao saveVideoInfoDao;
 	public VideoService(SaveVideoInfoDao saveVideoInfoDao){
     	this.saveVideoInfoDao = saveVideoInfoDao;
+	}
+  	public void sayHello(String name) {
+		System.out.println(saveVideoInfoDao.hello(name));
 	}
 }
 ```
@@ -122,14 +131,17 @@ SampleMain.java
 ```java
 public class SampleMain{
     public static void main(String[] args) {
-        ApplicationContext ctx = new AnnotationConfigApplicationContext(App1Config.class);
-        VideoService videoService1 = ctx.getBean("videoService1");
-        VideoService videoService2 = ctx.getBean("videoService2");
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(App1Config.class);
+        ctx.registerShutdownHook();
+        VideoService videoService1 = ctx.getBean("videoService1", VideoService.class);
+        videoService1.sayHello("abc");
+        VideoService videoService2 = ctx.getBean("videoService2", VideoService.class);
+        videoService2.sayHello("def");
     }
 }
 ```
 
-
+样例源码请移步[github之sample-spring-javaconfig](https://github.com/AngiWANG/sample-spring-javaconfig)
 
 ### @ComponentScan
 
