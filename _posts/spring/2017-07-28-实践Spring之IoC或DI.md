@@ -28,9 +28,23 @@ AnnotationConfigApplicationContext
 
 定义@bean的载体，好比一个定义<bean>的xml文件，可以被实例容器加载
 
-#### @Import
+### @Import
 
-引入其他的@Configuration
+引入其他的@Configuration，有如下三种方式
+
+1. 直接引入
+
+   直接引入另外一个配置类，最常用的方式，简单明了，例如：
+
+   `@Import(App2Config.class)`
+
+2. 条件引入
+
+   通过org.springframework.context.annotation.**ImportSelector**实现，实例参见[实践Spring Enable系列之EnableAsync](/2017/08/05/实践Spring-Enable系列之EnableAsync.html)
+
+3. 动态注册
+
+   通过org.springframework.context.annotation.**ImportBeanDefinitionRegistrar**实现，实例参见[实践Spring-Enable系列之EnableAspectJAutoProxy](/2017/08/05/实践Spring-Enable系列之EnableAspectJAutoProxy.html)
 
 ### @Bean
 
