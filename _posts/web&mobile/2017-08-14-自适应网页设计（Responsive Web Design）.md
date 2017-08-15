@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "自适应网页设计"
+title: "自适应网页设计（Responsive Web Design）"
 date: 2017-08-14 11:43:13 +0800
 categories: 移动互联网
 tags: responsive web mobile
