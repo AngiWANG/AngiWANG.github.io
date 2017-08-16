@@ -3,7 +3,7 @@ layout: post
 title: "实践任务流工具（Task Runner）之Grunt"
 date: 2017-08-15 09:03:13 +0800
 categories: 移动互联网
-tags: webpack browserify bundler javascript web mobile
+tags: task-runner grunt gulp javascript web mobile
 ---
 
 ## 介绍
