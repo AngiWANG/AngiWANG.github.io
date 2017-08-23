@@ -22,7 +22,13 @@ AnnotationConfigApplicationContext
 
 ## 基于XML
 
-## 基于注解（notation）
+## 基于注解
+
+@Component
+
+@Service
+
+## 基于Java Config
 
 ### @Configuration
 
@@ -165,4 +171,3 @@ One of `basePackageClasses()`, `basePackages()` or its alias `value()` may be sp
 
 Note that the `<context:component-scan>` element has an `annotation-config` attribute, however this annotation does not. This is because in almost all cases when using `@ComponentScan`, default annotation config processing (e.g. processing `@Autowired` and friends) is assumed. Furthermore, when using `AnnotationConfigApplicationContext`, annotation config processors are always registered, meaning that any attempt to disable them at the `@ComponentScan` level would be ignored.
 
-## 自动配置

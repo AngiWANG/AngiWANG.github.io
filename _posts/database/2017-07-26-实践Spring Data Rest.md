@@ -22,6 +22,8 @@ tags: database nosql spring-data-rest rest
 
 RepositoryRestMvcConfiguration
 
+spring boot之RepositoryRestMvcAutoConfiguration
+
 @RepositoryRestResource
 
 @RestResource

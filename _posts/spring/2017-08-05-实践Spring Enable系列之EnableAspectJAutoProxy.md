@@ -6,6 +6,14 @@ categories: Spring
 tags: spring AspectJ proxy
 ---
 
+切面：切点的容器，使用@Aspect定义
+
+切点（PointCut）：拦截的规则，一般分为基于方法（execution）或基于注解（@PointCut）
+
+建言（Advice）：拦截植入的动作，@Before、@After和@Around
+
+连接点（JoinPoint）：符合拦截的规则的每一个被拦截处
+
 Enables support for handling components marked with AspectJ's `@Aspect` annotation, similar to functionality found in Spring's `<aop:aspectj-autoproxy>` XML element. To be used on @`Configuration` classes as follows:
 
 ```java
@@ -42,7 +50,7 @@ Where FooService is a typical POJO component and MyAspect is an @Aspect-style as
  }
 ```
 
-In the scenario above, @EnableAspectJAutoProxy ensures that MyAspect will be properly processed and that FooService will be proxied mixing in the advice that it contributes. Users can control the type of proxy that gets created for `FooService` using the `proxyTargetClass()`attribute. The following enables CGLIB-style 'subclass' proxies as opposed to the default interface-based JDK proxy approach.
+In the scenario above, @EnableAspectJAutoProxy ensures that MyAspect will be properly processed and that FooService will be proxied mixing in the advice that it contributes. Users can control the type of proxy that gets created for `FooService` using the `proxyTargetClass()`attribute. The following enables **CGLIB-style 'subclass' proxies** as opposed to the default **interface-based JDK proxy** approach.
 
 ```java
  @Configuration

@@ -6,4 +6,4 @@ categories: 移动互联网
 tags: responsive web mobile
 ---
 
-[自适应网页设计（Responsive Web Design）](http://www.ruanyifeng.com/blog/2012/05/responsive_web_design.html)
+请移步-》[自适应网页设计（Responsive Web Design）](http://www.ruanyifeng.com/blog/2012/05/responsive_web_design.html)
