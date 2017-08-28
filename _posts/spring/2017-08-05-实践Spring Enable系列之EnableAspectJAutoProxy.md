@@ -8,11 +8,11 @@ tags: spring AspectJ proxy
 
 切面：切点的容器，使用@Aspect定义
 
-切点（PointCut）：拦截的规则，一般分为基于方法（execution）或基于注解（@PointCut）
+切点（PointCut）：拦截规则，一般分为基于方法（execution）或基于注解（@PointCut）
 
 建言（Advice）：拦截植入的动作，@Before、@After和@Around
 
-连接点（JoinPoint）：符合拦截的规则的每一个被拦截处
+连接点（JoinPoint）：符合拦截规则的每一个被拦截处
 
 Enables support for handling components marked with AspectJ's `@Aspect` annotation, similar to functionality found in Spring's `<aop:aspectj-autoproxy>` XML element. To be used on @`Configuration` classes as follows:
 

@@ -26,7 +26,13 @@ AnnotationConfigApplicationContext
 
 @Component
 
+@Controller
+
 @Service
+
+@Repository
+
+@Entity
 
 ## 基于Java Config
 
@@ -68,7 +74,13 @@ bean定义
 ### 依赖注入
 
 1. 引用方法注入
+
 2. 方法参数注入
+
+   默认按照类型注入
+
+   1. 构造方法参数注入
+   2. @Bean方法参数注入
 
 ### 生命周期
 
