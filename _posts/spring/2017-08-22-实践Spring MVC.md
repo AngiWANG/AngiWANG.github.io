@@ -6,20 +6,6 @@ categories: Spring
 tags: spring-mvc
 ---
 
-Spring Boot用于快速高效地创建可执行的Spring应用程序，进一步升华了习惯优于配置，其中核心之一就是**@EnableAutoConfiguration**，此注释自动载入应用程序所需的所有Bean，Spring Boot在类路径中查找META-INF/spring.factories，**spring-boot-autoconfigure**和**spring-boot-test-autoconfigure**这两个jar中都有这个文件，会import其中的@Configuration。
-
-
-
-| auto onfiguration             | 备注                                       |
-| ----------------------------- | ---------------------------------------- |
-| TestDatabaseAutoConfiguration | 根据驱动类自动识别并创建测试数据库（嵌入式）及数据源               |
-| H2ConsoleAutoConfiguration    | 是否自动开启H2 Console，spring.h2.console.enabled=true/false |
-|                               |                                          |
-
-
-
-
-
 ## 前端控制器（DispatcherServlet）
 
 ### 处理器映射（HandlerMapping）
@@ -32,21 +18,21 @@ Spring Boot用于快速高效地创建可执行的Spring应用程序，进一步
 
 ### 处理器适配器（HandlerAdapter）
 
-适配支持不同的处理器，默认实现：**SimpleControllerHandlerAdapter**，实现Controller接口的bean可以作为处理器。
+适配支持不同的处理器，默认实现：**SimpleControllerHandlerAdapter**，实现Controller接口的bean作为处理器。
 
 **AnnotationMethodHandlerAdapter**：2.5新增注解式控制器支持
 
 **RequestMappingHandlerAdapter**：3.1新增替代2.5，支持更多扩展点
 
-静态资源映射
+### 静态资源映射
 
 ## 处理器或页面控制器（Controller）
 
 ![Controller Hierarchy](/images/controller-hierarchy.png)
 
-请求处理方法（request-handling method）：处理http请求的方法，annotated handler method
+请求处理方法（request-handling method）：控制器中处理http请求的方法，annotated handler method
 
-ViewController
+### ViewController
 
 ## 拦截器（HandlerInterceptor）
 
@@ -54,7 +40,11 @@ ViewController
 
 ## ViewResolver
 
-根据逻辑视图名解析具体视图，默认实现：**InternalResourceViewResolver**，支持jsp视图
+根据逻辑视图名解析具体视图，默认实现：**BeanNameViewResolver**，根据逻辑视图名找同名bean（实现View接口）进行渲染
+
+**InternalResourceViewResolver**，支持jsp视图
+
+**ContentNegotiatingViewResolver**，ViewResolver代理，委托给不同的ViewResolver来处理不同的View
 
 ### RequestToViewNameTranslator
 
@@ -135,7 +125,7 @@ FlashMapManager
 
 ExceptionHandlerExceptionResolver
 
-国际化（LocaleResolver）
+### 国际化（LocaleResolver）
 
 主题（ThemeResolver）
 
