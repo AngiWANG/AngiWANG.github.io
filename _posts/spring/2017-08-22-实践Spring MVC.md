@@ -8,6 +8,8 @@ tags: spring-mvc
 
 ## 前端控制器（DispatcherServlet）
 
+## RequestMapping
+
 ### 处理器映射（HandlerMapping）
 
 请求到处理器（以及拦截器）的映射，默认实现：**BeanNameUrlHandlerMapping**，uri到到同名bean的映射，比如URI"/hello"映射到bean"/hello"。
@@ -23,6 +25,8 @@ tags: spring-mvc
 **AnnotationMethodHandlerAdapter**：2.5新增注解式控制器支持
 
 **RequestMappingHandlerAdapter**：3.1新增替代2.5，支持更多扩展点
+
+`<mvc:annotation-driven/>`或	@EnableWebMvc
 
 ### 静态资源映射
 
@@ -140,3 +144,6 @@ Spring表达式（Spring EL）
 JSTL
 
 单元测试和集成测试
+
+## HandlerExceptionResolver
+
