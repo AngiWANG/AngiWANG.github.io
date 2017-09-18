@@ -12,5 +12,6 @@ application.properties
 
 ```properties
 logging.path=/app/log/
+debug=true
 ```
 
