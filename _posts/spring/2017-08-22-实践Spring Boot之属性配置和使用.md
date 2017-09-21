@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "实践Spring Boot之参数配置"
+title: "实践Spring Boot之属性配置和使用"
 date: 2017-09-14 17:08:00 +0800
 categories: Spring
 tags: spring spring-boot properties
@@ -48,13 +48,21 @@ my.number.in.range=${random.int[1024,65536]}
 
 `random.int*`支持`value`参数和`max`参数，当提供`max`参数的时候，`value`就是最小值。
 
-### 应用程序以外的配置文件
+### 应用程序外基于Profile的配置文件
 
-config目录或应用根目录下application.properties或者appliaction.yml文件
+config目录或应用根目录下`application-{profile}.properties`或者`appliaction-{profile}.yml`文件或者`application.yml`(带`spring.profiles`)
+
+### 应用程序内基于Profile的配置文件
+
+config包或classpath根目录下`application-{profile}.properties`或者`appliaction-{profile}.yml`文件或者`application.yml`(带`spring.profiles`)
+
+### 应用程序外的配置文件
+
+config目录或应用根目录下`application.properties`或者`appliaction.yml`文件(不带`spring.profiles`)
 
 ### 应用程序内的配置文件
 
-config包或classpath根目录下application.properties或者appliaction.yml文件
+config包或classpath根目录下`application.properties`或者`appliaction.yml`文件(不带`spring.profiles`)
 
 ### 通过 @PropertySource 引入的配置文件
 
@@ -80,13 +88,21 @@ application.run(args);
 private String name;
 ```
 
+@Value除了支持属性注入外，还支持如下参数注入：
 
+1. 注入普通字符（@Value("hello, world")）
+2. 注入操作系统属性（@Value("#systemProperties['os.name']")）
+3. 注入表达式运算结果（@Value("#{ T(java.lang.Math).random()*100.0 }")）
+4. 注入其他Bean的属性（@Value("#{demoService.username}")）
+5. 注入文件内容（@Value("classpath:text.txt")）
+6. 注入网址内容（@Value("http://www.baidu.com")）
+7. 注入属性（@Value("${book.name}")）
 
 ### @ConfigurationProperties
 
-为了能够更加方便的分门别类的定义和使用属性，@ConfigurationProperties能够将相关属性自动绑定到java bean【通常称为配置类】
+为了能够更加方便的分门别类的定义和使用属性，@ConfigurationProperties能够将相关属性自动绑定到Java Bean【通常称为配置类】，会自动进行类型转换，还支持嵌套属性。使用配置类有两种方式，一种是用@Component定义配置bean，另一种是使用@EnableConfigurationProperties。
 
-，使用配置类有两种方式，一种是用@Component定义配置bean，另一种是使用@EnableConfigurationProperties。
+应用于Java Bean：
 
 ```java
 @ConfigurationProperties(prefix="my")
@@ -108,7 +124,7 @@ public class Config {
 }
 ```
 
-java bean Config对应的配置如下：
+Java Bean Config对应的配置如下：
 
 ```properties
 my.name=Isea533
@@ -126,8 +142,6 @@ public Config configComponent() {
     ...
 }
 ```
-
-会自动进行类型转换，还支持嵌套属性注入。
 
 ### @EnableConfigurationProperties
 
@@ -147,6 +161,24 @@ app.description=${app.name:默认名称} is a Spring Boot application
 ```properties
 server.port=${port:8080}
 ```
+
+### 属性名匹配规则
+
+```java
+@Component
+@ConfigurationProperties(prefix="person")
+public class ConnectionSettings {
+
+    private String firstName;
+
+}
+```
+
+`firstName`可以使用的属性名如下：
+
+1. `person.firstName`，标准的驼峰式命名
+2. `person.first-name`，虚线（`-`）分割方式，推荐在`.properties`和`.yml`配置文件中使用
+3. `PERSON_FIRST_NAME`，大写下划线形式，建议在系统环境变量中使用
 
 ## 验证
 
