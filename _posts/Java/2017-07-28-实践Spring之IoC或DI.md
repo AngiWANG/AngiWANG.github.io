@@ -2,7 +2,7 @@
 layout: post
 title: "实践Spring之IoC或DI"
 date: 2017-07-28 09:25:00 +0800
-categories: Spring
+categories: Java
 tags: spring IoC DI
 ---
 

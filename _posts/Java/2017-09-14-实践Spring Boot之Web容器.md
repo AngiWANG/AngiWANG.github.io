@@ -2,7 +2,7 @@
 layout: post
 title: "实践Spring Boot之Web容器"
 date: 2017-09-07 17:08:00 +0800
-categories: Spring
+categories: Java
 tags: spring spring-boot web
 ---
 

@@ -2,7 +2,7 @@
 layout: post
 title: "实践Spring MVC"
 date: 2017-08-22 17:08:00 +0800
-categories: Spring
+categories: Java
 tags: spring-mvc
 ---
 

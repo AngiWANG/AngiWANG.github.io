@@ -2,7 +2,7 @@
 layout: post
 title: "实践Spring之Profile"
 date: 2017-09-18 17:08:00 +0800
-categories: Spring
+categories: Java
 tags: spring profile
 ---
 
