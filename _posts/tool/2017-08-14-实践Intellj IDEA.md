@@ -18,6 +18,30 @@ Line spacing: 1.2
 
 
 
+### 快捷键
+
+| 快捷键          | 功能              |
+| ------------ | --------------- |
+| Ctrl+I       | 自助接口实现选择和生成     |
+| Ctrl+O       | 自助Override选择和生成 |
+| Ctrl+Shift+L | 格式化             |
+|              |                 |
+|              |                 |
+|              |                 |
+|              |                 |
+|              |                 |
+|              |                 |
+|              |                 |
+|              |                 |
+|              |                 |
+|              |                 |
+|              |                 |
+|              |                 |
+|              |                 |
+|              |                 |
+|              |                 |
+|              |                 |
+
 ###  Edition Comparison
 
 [Community VS Ultimate](http://www.jetbrains.com/idea/features/editions_comparison_matrix.html)

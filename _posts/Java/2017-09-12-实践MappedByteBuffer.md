@@ -2,7 +2,7 @@
 layout: post
 title: "实践MappedByteBuffer"
 date: 2017-09-12 17:58:13 +0800
-categories: java
+categories: Java
 tags: java io MappedByteBuffer buffer DirectByteBuffer
 ---
 

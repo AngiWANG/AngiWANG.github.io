@@ -6,6 +6,8 @@ categories: Java
 tags: spring-mvc
 ---
 
+[Spring MVC](http://projects.spring.io/spring-framework/)是Spring Framework的Web解决方案之一。
+
 ## 前端控制器（DispatcherServlet）
 
 ## RequestMapping
