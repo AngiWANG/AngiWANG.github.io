@@ -13,3 +13,4 @@ tags: charset encoding comprehensive
 ## 实现
 
 ## native2ascii
+[native2ascii](https://docs.oracle.com/javase/7/docs/technotes/tools/windows/native2ascii.html)
