@@ -1,0 +1,37 @@
+JBoss7的默认http线程池不一定符合需要，比如当并发下去后线程不会回收，可以参考如下方法自定义http线程池。
+此处以JBoss7standalone模式的配置文件为例（${JBOSS_HOME}/standalone/configuration/standalone.xml）
+1、在子系统threads中找到线程池定义
+
+```xml
+<subsystem xmlns="urn:jboss:domain:threads:1.1"/>
+```
+
+改为如下：
+
+```xml
+<subsystem xmlns="urn:jboss:domain:threads:1.1">
+     <bounded-queue-thread-pool name="http-executor" allow-core-timeout="false">
+          <core-threads count="10" />
+          <queue-length count="200" />
+          <max-threads count="200" />
+          <keepalive-time time="60" unit="seconds" />
+     </bounded-queue-thread-pool>
+</subsystem>
+```
+
+备注
+JBoss7支持如下线程池实现，上述样例使用的是bounded-queue-thread-pool，其他及具体参数可以参考${JBOSS_HOME}/docs/schema/jboss-as-threads_1_1.xsd
+
+
+2、配置web子系统使用上面定义的线程池
+新增下面的红色配置，与上面定义的线程池名字对应
+
+```xml
+<subsystem xmlns="urn:jboss:domain:web:1.1" default-virtual-server="default-host" native="false">
+    <connector name="http" protocol="HTTP/1.1" scheme="http" socket-binding="http" executor="http-executor"/>
+    <virtual-server name="default-host" enable-welcome-root="true">
+        <alias name="localhost"/>
+        <alias name="example.com"/>
+    </virtual-server>
+</subsystem>
+```
