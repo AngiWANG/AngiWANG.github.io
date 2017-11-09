@@ -8,6 +8,10 @@ tags: spring spring-boot java spring-cloud Eureka
 
 客户端调用服务端时，如何定位服务端呢？
 
+### DiscoveryClient
+
+
+
 ## 使用LoadBalancerClient
 
 LoadBalanceClient是Spring Cloud Commons自带的。根据服务名查找选择服务，然后拼装服务地址。
