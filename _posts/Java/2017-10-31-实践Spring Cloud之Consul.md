@@ -41,6 +41,8 @@ Spring Cloud对Consul提供了封装支持，添加如下依赖：
 </dependency>
 ```
 
+**注：spring-cloud-starter-consul-discovery已经依赖了spring-cloud-starter-ribbon**
+
 添加Consul服务器配置
 
 application.properties中增加如下配置：

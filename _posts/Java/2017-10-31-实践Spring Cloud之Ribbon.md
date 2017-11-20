@@ -8,11 +8,11 @@ tags: spring spring-boot java spring-cloud Eureka
 
 客户端调用服务端时，如何定位服务端呢？
 
-### DiscoveryClient
+## DiscoveryClient
 
 
 
-## 使用LoadBalancerClient
+### 使用LoadBalancerClient
 
 LoadBalanceClient是Spring Cloud Commons自带的。根据服务名查找选择服务，然后拼装服务地址。
 
@@ -38,7 +38,7 @@ public class HelloClientController {
 }
 ```
 
-## 使用Ribbon
+### 使用Ribbon
 
 自动基于服务名组装服务地址
 
@@ -47,6 +47,23 @@ public class HelloClientController {
 	<groupId>org.springframework.cloud</groupId>
 	<artifactId>spring-cloud-starter-ribbon</artifactId>
 </dependency>
+```
+
+```java
+@EnableDiscoveryClient
+@SpringBootApplication
+public class HelloClientApplication {
+
+	@Bean
+	@LoadBalanced
+	RestTemplate restTemplate() {
+		return new RestTemplate();
+	}
+
+	public static void main(String[] args) {
+		SpringApplication.run(HelloClientApplication.class, args);
+	}
+}
 ```
 
 
@@ -69,3 +86,16 @@ public class HelloClientController {
 ```
 
 **注：spring-cloud-starter-eureka和spring-cloud-starter-consul-discovery已经依赖了spring-cloud-starter-ribbon**
+
+
+
+```properties
+# 缓存刷新时间间隔
+ribbon.ServerListRefreshInterval=30
+```
+
+
+
+DynamicServerListLoadBalancer
+
+ZoneAwareLoadBalancer

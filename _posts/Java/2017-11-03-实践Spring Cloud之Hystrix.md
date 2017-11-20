@@ -6,3 +6,4 @@ categories: Java
 tags: spring spring-boot java spring-cloud Hystrix
 ---
 
+Hystrix实现服务容错保护，提供了断路器、线程隔离等一系列服务保护功能。

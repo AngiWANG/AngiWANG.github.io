@@ -14,7 +14,7 @@ Spring Boot支持多种方式设置属性值，优先级从高到低如下：
 
 ### 命令行参数
 
-即java命令行参数，只是形式稍有区别，前面增加“--”，格式：--key[=value]），多个用空格分隔，例如：
+即java命令行参数，只是形式稍有区别，前面增加“`--`”，格式：`--key[=value]`，多个用空格分隔，例如：
 
 ```shell
 $ java -jar app.jar --debug --server.port=9090
@@ -48,9 +48,33 @@ my.number.in.range=${random.int[1024,65536]}
 
 `random.int*`支持`value`参数和`max`参数，当提供`max`参数的时候，`value`就是最小值。
 
+**备注：同名属性文件只会读取一个，比如读取了外部的application.properties就不会在读取应用程序内的**
+
 ### 应用程序外基于Profile的配置文件
 
 config目录或应用根目录下`application-{profile}.properties`或者`appliaction-{profile}.yml`文件或者`application.yml`(带`spring.profiles`)
+
+`application.yml`(带`spring.profiles`)样例：
+
+```yaml
+logging:
+  level:
+   root: INFO
+---
+spring:
+  profiles: development
+logging:
+  level:
+    root: DEBUG
+---
+spring:
+  profiles: production
+logging:
+  path: /tmp/
+  file: BookWorm.log
+  level:
+    root: WARN
+```
 
 ### 应用程序内基于Profile的配置文件
 
