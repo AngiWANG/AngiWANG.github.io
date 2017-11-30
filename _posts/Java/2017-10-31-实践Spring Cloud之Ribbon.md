@@ -96,6 +96,25 @@ ribbon.ServerListRefreshInterval=30
 
 
 
-DynamicServerListLoadBalancer
+## 方法
 
-ZoneAwareLoadBalancer
+### get
+
+### post
+
+### put
+
+### delete
+
+* ILoadBalancer
+  * BaseLoadBalancer
+    * IPing
+      * IPingStrategy
+    * IRule
+      * RoundRobinRule
+  * DynamicServerListLoadBalancer：动态更新，过滤
+    * ServerListFilter
+  * ZoneAwareLoadBalancer：默认
+
+
+

@@ -8,7 +8,7 @@ tags: spring spring-boot java spring-cloud
 
 [Spring Cloud](http://projects.spring.io/spring-cloud/)构建在Spring Boot之上，提供了服务治理相关的依赖管理。
 
-## 配置
+### 依赖
 
 ```xml
 <properties>
@@ -31,6 +31,14 @@ tags: spring spring-boot java spring-cloud
   </dependencies>
 </dependencyManagement>
 ```
+
+## Spring Cloud Application Context
+
+
+
+bootstrap.properties/yml
+
+## Spring Cloud Commons
 
 
 

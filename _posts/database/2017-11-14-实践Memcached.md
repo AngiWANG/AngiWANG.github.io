@@ -41,3 +41,7 @@ cp memcached /etc/init.d/memcached
 chmod +x /etc/init.d/memcached
 chkconfig --add memcached
 chkconfig memcached on
+
+
+
+/usr/local/bin/memcached -P /app/software/memcached.pid -d -u ctsapp -m 128 -l 0.0.0.0 -p 11211 -vvv > /app/log/memcached.log 2>&1

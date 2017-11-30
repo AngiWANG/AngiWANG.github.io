@@ -58,7 +58,7 @@ THE SELF PRESERVATION MODE IS TURNED OFF.THIS MAY NOT PROTECT INSTANCE EXPIRY IN
 
 ### region
 
-默认：default
+默认：us-east-1
 
 ```properties
 # 自定义region
@@ -87,11 +87,24 @@ Ribbon默认优先访问位于同一zone的服务端，其次才是其他zone的
 
 @EnableDiscoveryClient
 
-org.springframework.cloud.netflix.eureka.EurekaClientConfigBean，此类实现了com.netflix.discovery.EurekaClientConfig，所有的配置属性以eureka.client开头
+com.netflix.discovery.DiscoveryClient
+
+com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver.getClusterEndpointsFromConfig()
+
+com.netflix.appinfo.InstanceInfo.getZone(String[], InstanceInfo)：当前eureka instance的zone，available-zones的第一个
+
+com.netflix.discovery.endpoint.EndpointUtils.getServiceUrlsMapFromConfig(EurekaClientConfig, String, boolean)
+
+org.springframework.cloud.netflix.eureka.EurekaClientConfigBean，此类实现了com.netflix.discovery.EurekaClientConfig接口，所有的配置属性以eureka.client开头
 
 ```properties
-# 定义Eureka server地址
+# 定义Eureka server地址，zone-》eureka server list
 eureka.client.service-url.defaultZone=http://192.168.70.139:8888/eureka/
+eureka.client.service-url.zone1=http://192.168.70.139:8888/eureka/,http://192.168.70.139:8888/eureka/
+# 定义实例可用区域和所在区域（第一个），region-》zone list
+eureka.client.availability-zones.beijing=zone1,zone2
+# 定义服务所在region
+eureka.client.region=beijing
 # 定义Eureka server地址刷新时间间隔（默认5分钟），可以用来实现动态修改Eureka server地址
 eureka.client.eureka-service-url-poll-interval-seconds=300
 # 是否注册到Eureka server
@@ -122,7 +135,7 @@ eureka.client.shouldDisableDelta=true
 eureka.instance.prefer-ip-address=true
 ```
 
-org.springframework.cloud.netflix.eureka.EurekaInstanceConfigBean，此类间接实现了com.netflix.appinfo.EurekaInstanceConfig，所有的配置属性以eureka.instance开头。
+
 
 服务注册
 
@@ -142,10 +155,14 @@ org.springframework.cloud.netflix.eureka.EurekaInstanceConfigBean，此类间接
 
 ## Eureka Instance
 
+org.springframework.cloud.netflix.eureka.EurekaInstanceConfigBean，此类间接实现了com.netflix.appinfo.EurekaInstanceConfig，所有的配置属性以eureka.instance开头。
+
 ```properties
 # 实例主机名（基于主机名注册的情况下，同一主机名下不可以运行多个eureka server）
 eureka.instance.hostname=peer1
 # 默认主机名注册，可以修改为ip注册优先
 eureka.instance.prefer-ip-address=false
+# 自定义元数据
+eureka.instance.metadata-map.zone=zone1
 ```
 

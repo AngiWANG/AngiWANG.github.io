@@ -52,7 +52,7 @@ public class ReadingListApplication {
 
 * 直接运行Main类
 
-**Fat Jar或Executable Jar**
+### Fat Jar或Executable Jar
 
 如果想打包为可执行的jar（即依赖也打包到jar中），则可以通过`spring-boot-maven-plugin`实现，添加插件
 
@@ -68,6 +68,9 @@ public class ReadingListApplication {
 ```
 
 ```shell
-$ mvn package
+# 打包
+$ mvn clean package
+# 执行
+$ java -jar target/spring-boot-sample-0.0.1-SNAPSHOT.jar
 ```
 

@@ -124,3 +124,10 @@ public class HelloController {
 }
 ```
 
+feign默认使用断路器（hystrix）包裹所有方法，可以全局禁用，也可以局部禁用。
+
+```properties
+# 全局禁用hystrix
+feign.hystrix.enabled=false
+```
+
