@@ -71,7 +71,8 @@ eureka.client.region=shanghai
 
 ```properties
 # 自定义zone
-eureka.client.available-zone=dev,test
+eureka.client.available-zone.us-east-1=dev,test
+eureka.client.available-zone.shanghai=dev,test
 ```
 
 Ribbon默认优先访问位于同一zone的服务端，其次才是其他zone的服务端
@@ -98,12 +99,12 @@ com.netflix.discovery.endpoint.EndpointUtils.getServiceUrlsMapFromConfig(EurekaC
 org.springframework.cloud.netflix.eureka.EurekaClientConfigBean，此类实现了com.netflix.discovery.EurekaClientConfig接口，所有的配置属性以eureka.client开头
 
 ```properties
-# 定义Eureka server地址，zone-》eureka server list
+# 定义Eureka server地址，zone-》eureka server list，默认已经定义了defaultZone-》http://localhost:8761/eureka/
 eureka.client.service-url.defaultZone=http://192.168.70.139:8888/eureka/
 eureka.client.service-url.zone1=http://192.168.70.139:8888/eureka/,http://192.168.70.139:8888/eureka/
-# 定义实例可用区域和所在区域（第一个），region-》zone list
+# 定义实例可用区域和所在区域（第一个），region-》zone list，如果region没有定义zone list，则取默认的defaultZone
 eureka.client.availability-zones.beijing=zone1,zone2
-# 定义服务所在region
+# 定义服务所在region，默认值us-east-1
 eureka.client.region=beijing
 # 定义Eureka server地址刷新时间间隔（默认5分钟），可以用来实现动态修改Eureka server地址
 eureka.client.eureka-service-url-poll-interval-seconds=300

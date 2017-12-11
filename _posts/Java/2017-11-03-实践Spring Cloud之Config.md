@@ -8,12 +8,6 @@ tags: spring spring-boot java spring-cloud Config
 
 ![Spring Cloud Config Architecture](/images/spring-cloud-config-architecture.png)
 
-### 应用属性文件
-
-{application}-{profile}.properties/yml
-
-{application}.properties/yml（default profile）
-
 ## Config Server
 
 依赖：
@@ -48,10 +42,13 @@ URL路径和配置文件的映射关系：
 ```properties
 # 固定仓库
 spring.cloud.config.server.git.uri=http://192.168.70.244/ITS/config.git
+
 # 不同的应用不同的仓库（利用占位符）
 spring.cloud.config.server.git.uri=http://192.168.70.244/ITS/{application}.git
+
 # 本地仓库
 spring.cloud.config.server.git.uri=file://home/angi/sts_3.8.3_koolyun/config
+
 # 本地文件系统
 spring.profiles.active=native
 # 默认src/main/resource目录下检索配置文件，可以指定
@@ -139,6 +136,14 @@ spring.cloud.config.uri=http://localhost:7003/
 ```
 
 其他配置从config server获取
+
+### 应用属性文件
+
+{application}-{profile}.properties/yml
+
+{application}.properties/yml（default profile）
+
+通过`spring.cloud.config.profile=dev`设定profile
 
 ### 动态刷新
 
