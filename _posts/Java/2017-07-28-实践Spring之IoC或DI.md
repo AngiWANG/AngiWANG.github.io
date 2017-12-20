@@ -24,9 +24,9 @@ AnnotationConfigWebApplicationContext：适用于web项目
 
 ## 基于XML
 
-### <import/>
+### `<import/>`
 
-### <context:component-scan/>
+### `<context:component-scan/>`
 
 ## 基于注解
 
@@ -56,7 +56,7 @@ AnnotationConfigWebApplicationContext：适用于web项目
 
    直接引入另外一个配置类，最常用的方式，简单明了，例如：
 
-   `@Import(App2Config.class)`
+   `@Import(App2Config.class)`，效果类似`<import/>`
 
 2. 条件引入
 
@@ -169,7 +169,29 @@ public class App2Config{
     }
 }
 ```
+App3Config.java
+
+```java
+@Configuration
+public class App3Config {
+	
+	private ISaveVideoInfoDao saveVideoInfoDao;
+	
+	// 构造参数注入
+	public App3Config(ISaveVideoInfoDao saveVideoInfoDao){
+		this.saveVideoInfoDao = saveVideoInfoDao;
+	}
+
+	@Bean
+	public IVideoService videoService3() {
+		IVideoService videoService = new VideoService(saveVideoInfoDao);
+		return videoService;
+	}
+}
+```
+
 SampleMain.java
+
 ```java
 public class SampleMain{
     public static void main(String[] args) {
@@ -179,6 +201,8 @@ public class SampleMain{
         videoService1.sayHello("abc");
         VideoService videoService2 = ctx.getBean("videoService2", VideoService.class);
         videoService2.sayHello("def");
+        VideoService videoService3 = ctx.getBean("videoService3", VideoService.class);
+	    videoService3.sayHello("ghi");
     }
 }
 ```

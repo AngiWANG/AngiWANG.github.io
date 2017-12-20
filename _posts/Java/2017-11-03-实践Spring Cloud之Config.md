@@ -127,12 +127,21 @@ bootstrap.properties/yml
 # {application}
 spring.application.name=sample
 # config server
-# 由于生产环境一般是独立的，默认配置为非生产，生产环境的参数通过命令行参数配置（shell启动脚本）
+# 由于生产环境一般是独立的，默认配置为非生产，生产环境的参数通过系统属性、命令行参数或环境变量等配置（shell启动）
 spring.cloud.config.uri=http://localhost:7003/
 # {profile}，配置建议同config server
 # spring.cloud.config.profile=default
 # {label}，配置建议同config server
 # spring.cloud.config.label=master
+# 快速失败（连不上配置中心启动失败）
+spring.cloud.config.fail-fast=true
+
+# 如果配置中心服务化
+# registry center
+eureka.client.service-url.defaultZone=http://192.168.70.139:8888/eureka/
+# config center
+spring.cloud.config.discovery.enabled=true
+spring.cloud.config.discovery.service-id=config-center
 ```
 
 其他配置从config server获取

@@ -6,6 +6,16 @@ categories: Java
 tags: spring AspectJ proxy
 ---
 
+```java
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Import(AspectJAutoProxyRegistrar.class)
+public @interface EnableAspectJAutoProxy {
+//...
+}
+```
+
 切面：切点的容器，使用@Aspect定义
 
 切点（PointCut）：拦截规则，一般分为基于方法（execution）或基于注解（@PointCut）

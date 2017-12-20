@@ -75,7 +75,7 @@ eureka.client.available-zone.us-east-1=dev,test
 eureka.client.available-zone.shanghai=dev,test
 ```
 
-Ribbon默认优先访问位于同一zone的服务端，其次才是其他zone的服务端
+Ribbon默认优先访问位于同一zone的服务，其次才是其他zone的服务端
 
 ## Eureka Client
 
@@ -102,7 +102,7 @@ org.springframework.cloud.netflix.eureka.EurekaClientConfigBean，此类实现�
 # 定义Eureka server地址，zone-》eureka server list，默认已经定义了defaultZone-》http://localhost:8761/eureka/
 eureka.client.service-url.defaultZone=http://192.168.70.139:8888/eureka/
 eureka.client.service-url.zone1=http://192.168.70.139:8888/eureka/,http://192.168.70.139:8888/eureka/
-# 定义实例可用区域和所在区域（第一个），region-》zone list，如果region没有定义zone list，则取默认的defaultZone
+# 定义实例可用区域和所在区域（第一个），region-》zone list，如果region没有定义zone list，则取默认的defaultZone，会以所在区域去找eureka server
 eureka.client.availability-zones.beijing=zone1,zone2
 # 定义服务所在region，默认值us-east-1
 eureka.client.region=beijing

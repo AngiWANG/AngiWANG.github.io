@@ -6,7 +6,7 @@ categories: Java
 tags: spring spring-boot java spring-cloud Zuul
 ---
 
-
+实现对/hystrix.stream端点数据的聚合，对外提供统一服务
 
 ```xml
 <dependency>
@@ -15,3 +15,4 @@ tags: spring spring-boot java spring-cloud Zuul
 </dependency>
 ```
 
+提供/turbine.stream端点

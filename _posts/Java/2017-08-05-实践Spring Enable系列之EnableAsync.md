@@ -6,6 +6,16 @@ categories: Java
 tags: spring asynchronous thread-pool
 ---
 
+```java
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Import(AsyncConfigurationSelector.class)
+public @interface EnableAsync {
+//...
+}
+```
+
 Enables Spring's asynchronous method execution capability, similar to functionality found in Spring's `<task:*>` XML namespace. To be used on @`Configuration`classes as follows:
 
 ```java
