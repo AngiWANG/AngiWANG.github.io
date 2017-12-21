@@ -17,7 +17,7 @@ tags: tool git gitlab
 登录原仓库gitlab主机
 
 ```shell
-# 切换到git用户（gitlab的用户）
+# 切换到git用户（gitlab的运行用户，根目录/var/opt/gitlab）
 $ su - git
 # 生产ssh密钥对，一路回车即可
 $ ssh-kengen
