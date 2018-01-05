@@ -19,6 +19,13 @@ clientPort=2181
 
 
 ```shell
+# 启动
+$ ./zkServer.sh start
+```
+
+
+
+```shell
 $ ./zkServer.sh --help
 ZooKeeper JMX enabled by default
 Using config: /app/software/zookeeper/bin/../conf/zoo.cfg
@@ -38,10 +45,12 @@ Usage: ./zkServer.sh {start|start-foreground|stop|restart|status|upgrade|print-c
 
 ### 伪集群
 
+在一台服务器上部署3个节点，实现伪集群
+
 ```properties
 tickTime=2000
 dataDir=/app/software/zookeeper-3.4.9-1/data
-# 2181,2182,2183
+# 三个节点端口不同，2181,2182,2183
 clientPort=2181
 initLimit=5
 syncLimit=2
@@ -61,7 +70,7 @@ $ ./zkCli.sh -server localhost:2181 localhost:2182 localhost:2183
 
 ### 真实集群
 
-
+在三台服务器上分别部署一个节点，实现真实集群
 
 ```properties
 tickTime=2000

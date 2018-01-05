@@ -6,7 +6,7 @@ categories: Java
 tags: spring spring-boot java spring-cloud
 ---
 
-[Spring Cloud](http://projects.spring.io/spring-cloud/)构建在Spring Boot之上，提供了服务治理相关的依赖管理。
+[Spring Cloud](http://projects.spring.io/spring-cloud/)构建在Spring Boot之上，提供了服务治理相关的依赖管理。[Spring Cloud Reference Manual](https://cloud.spring.io/spring-cloud-static/current/)
 
 ### 依赖
 
@@ -32,15 +32,16 @@ tags: spring spring-boot java spring-cloud
 </dependencyManagement>
 ```
 
-## Spring Cloud Application Context
+## Spring Cloud Context
 
-
+Spring Cloud Context provides utilities and special services for the `ApplicationContext` of a Spring Cloud application (bootstrap context, encryption, refresh scope and environment endpoints)
 
 bootstrap.properties/yml
 
 ## Spring Cloud Commons
 
-
+Spring Cloud Commons is a set of abstractions and common classes used in different Spring Cloud implementations (eg. Spring Cloud Netflix vs. 
+Spring Cloud Consul).
 
 ## @SpringCloudApplication
 

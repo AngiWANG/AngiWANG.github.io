@@ -77,6 +77,45 @@ eureka.client.available-zone.shanghai=dev,test
 
 Ribbon默认优先访问位于同一zone的服务，其次才是其他zone的服务端
 
+### 安全保护
+
+```xml
+<dependency>  
+    <groupId>org.springframework.boot</groupId>  
+    <artifactId>spring-boot-starter-security</artifactId>  
+</dependency>
+```
+
+新增配置：
+
+```properties
+security.basic.enabled=true
+security.user.name=admin
+security.user.password=admin123
+```
+
+or
+
+```yaml
+# 安全认证的配置  
+security:
+  basic:
+    enabled: true
+  user:
+    name: admin
+    password: admin123
+```
+
+浏览器访问eureka console需要输入账号。
+
+eureka客户端：
+
+```properties
+eureka.client.service-url.defaultZone=http://admin:admin123@192.168.70.139:8888/eureka/
+```
+
+
+
 ## Eureka Client
 
 ```xml
@@ -132,12 +171,6 @@ eureka.client.shouldDisableDelta=true
 
 
 
-```properties
-eureka.instance.prefer-ip-address=true
-```
-
-
-
 服务注册
 
 服务续约（renew）
@@ -154,6 +187,21 @@ eureka.instance.prefer-ip-address=true
 
 负载均衡
 
+
+
+当无法连接到eureka server时报错如下：
+
+```
+2017-12-29 09:46:57.540 ERROR 5092 --- [           main] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_CTS-HELLO-CLIENT/192.168.88.123:cts-hello-client - was unable to refresh its cache! status = Cannot execute request on any known server
+
+com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:111) ~[eureka-client-1.6.2.jar:1.6.2]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.getApplications(EurekaHttpClientDecorator.java:134) ~[eureka-client-1.6.2.jar:1.6.2]
+...
+```
+
+
+
 ## Eureka Instance
 
 org.springframework.cloud.netflix.eureka.EurekaInstanceConfigBean，此类间接实现了com.netflix.appinfo.EurekaInstanceConfig，所有的配置属性以eureka.instance开头。
@@ -161,9 +209,11 @@ org.springframework.cloud.netflix.eureka.EurekaInstanceConfigBean，此类间接
 ```properties
 # 实例主机名（基于主机名注册的情况下，同一主机名下不可以运行多个eureka server）
 eureka.instance.hostname=peer1
-# 默认主机名注册，可以修改为ip注册优先
-eureka.instance.prefer-ip-address=false
+# 默认主机名注册，可以修改为ip注册优先，eureka list status显示名称对应的连接
+eureka.instance.prefer-ip-address=true
 # 自定义元数据
 eureka.instance.metadata-map.zone=zone1
+# eureka.instace.instance-id，eureka list status显示名称
+eureka.instance.instance-id=${spring.cloud.client.ipAddress}:${spring.application.name}:${server.port}
 ```
 
