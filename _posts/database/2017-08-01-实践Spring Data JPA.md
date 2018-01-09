@@ -61,3 +61,28 @@ class ApplicationConfig {
 
 
 
+\#定义泛型参数化的继承Spring Data 
+JPA的某一个接口，自动生成实现（org.springframework.data.jpa.repository.support.SimpleJpaRepository<T,
+ ID>），拥有18个基本方法
+
+<SpringDataJpaRepository接口> extends JpaRepository<Model, Long>
+
+- 自定义查询方法
+
+<查询动词><主题>by<断言>
+
+查询动词：get/read/find/count
+
+主题：可省略，一般是由泛型参数化决定的，例外Distinct开头
+
+- 声明自定义查询
+
+@Query
+
+- 混合自定义
+
+//默认：repositoryImplementationPostfix="Impl"
+
+<SpringDataJpaRepository接口>Impl
+
+@PersistenceContext

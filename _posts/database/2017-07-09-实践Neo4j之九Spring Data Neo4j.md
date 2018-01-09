@@ -26,3 +26,7 @@ Spring Data Neo4j注解
 | @RelatedToVia        | Set/List/Collection/Iterable (read-only)/<RelattionShipEntity>，用于rich relationShip，默认type从RelattionShipEntity推断 |
 | @RelationShipType    | ReletionShipType                         |
 | @ResultColumn        |                                          |
+
+GraphDatabaseService
+
+org.springframework.data.neo4j.repository.support.SimpleNeo4jRepository<T, ID>
