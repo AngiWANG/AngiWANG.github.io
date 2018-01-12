@@ -6,18 +6,16 @@ categories: Java
 tags: spring spring-boot datasource
 ---
 
-基于数据库的Java应用涉及两个概念，一个是使用哪种**数据库（Database）**，比如：Oracle、MySQL或嵌入式数据库（h2/derby/hsql）等，另一个是使用哪种**数据源（DataSource，也即数据库连接池）**，数据库和数据源可以任意搭配，比如：tomcat数据源/Hikari/DBCP1/DBCP2/SimpleDriverDataSource等。
+基于数据库的Java应用涉及两个概念，一个是使用哪种**数据库（Database）**，比如：Oracle、MySQL和嵌入式数据库（比如：h2/derby/hsql）等，另一个是使用哪种**数据源（DataSource，也即数据库连接池）**，比如：tomcat数据源/Hikari/DBCP1/DBCP2/SimpleDriverDataSource等，数据库和数据源可以任意搭配。
 
-spring boot自动配置支持多种数据源，比如：**Tomcat数据源/Hikari/DBCP1/DBCP2连接池和SimpleDriverDataSource**，根据相应class和spring.datasource.type属性的取值来判断，可取值包括如下：
+spring boot自动配置支持多种数据源（DataSourceAutoConfiguration），比如：**Tomcat数据源/Hikari/DBCP1/DBCP2连接池和SimpleDriverDataSource**，根据相应class（DataSourcePoolMetadataProvidersConfiguration）和spring.datasource.type属性的取值来判断，可取值包括如下：
 
 * org.apache.tomcat.jdbc.pool.DataSource
 * com.zaxxer.hikari.HikariDataSource
 * org.apache.commons.dbcp.BasicDataSource
 * org.apache.commons.dbcp2.BasicDataSource
 
-**嵌入式数据库数据源**默认使用**SimpleDriverDataSource**数据源和嵌入式数据库，优先级相对其他数据源较低。
-
-org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+**嵌入式数据库数据源**默认使用嵌入式数据库（EmbeddedDatabase）和**SimpleDriverDataSource**数据源，比其他数据源优先级低。
 
 ## 通用配置
 
@@ -33,9 +31,35 @@ spring:
 
 可以不用指定驱动名称，spring boot会自动根据url识别。
 
+如果url也不指定，则根据已加载的驱动识别使用嵌入式数据库（EmbeddedDatabaseConnection）。
+
+```java
+	public String determineUrl() {
+		if (StringUtils.hasText(this.url)) {
+			return this.url;
+		}
+		String url = this.embeddedDatabaseConnection.getUrl(determineDatabaseName());
+		if (!StringUtils.hasText(url)) {
+			throw new DataSourceBeanCreationException(this.embeddedDatabaseConnection,
+					this.environment, "url");
+		}
+		return url;
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		this.embeddedDatabaseConnection = EmbeddedDatabaseConnection
+				.get(this.classLoader);
+	}
+```
+
+
+
 具体数据源的定义以及相关配置由org.springframework.boot.autoconfigure.jdbc.DataSourceConfiguration实现。
 
 ## Tomcat数据源
+
+spring-boot-starter-data-jpa和spring-boot-starter-jdbc默认使用Tomcat数据源
 
 ```xml
 <dependency>
@@ -94,7 +118,11 @@ spring:
 
 org.springframework.boot.autoconfigure.jdbc.EmbeddedDataSourceConfiguration
 
-配置类：SimpleDriverDataSource
+
+
+配置类：SimpleDriverDataSource和EmbeddedDatabaseBuilder
+
+默认HSQL，默认脚本schema.sql和data.sql
 
 ```
 2017-09-15 21:40:40.122  INFO 4478 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
@@ -124,6 +152,6 @@ public class TestDatabaseAutoConfiguration {
 
 
 
-开发测试时**内嵌式数据库**可能还不错，spring-boot的支持也相当给力，可以不用做任何配置。
+开发测试时**嵌入式数据库**可能还不错，spring-boot的支持也相当给力，可以不用做任何配置。
 
-对于生产等环境，可能需要使用独立的数据库服务器，则可以通过配置即可实现。
+对于生产等环境，需要使用独立的数据库服务器，则可以通过配置即可实现。

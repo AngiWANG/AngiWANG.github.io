@@ -32,7 +32,7 @@ http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
 ```java
 @Configuration
-@EnableJpaRepositories
+@EnableJpaRepositories(basePackages="spittr.db")
 @EnableTransactionManagement
 class ApplicationConfig {
     @Bean
@@ -69,6 +69,8 @@ JPA的某一个接口，自动生成实现（org.springframework.data.jpa.reposi
 
 - 自定义查询方法
 
+自动实现
+
 <查询动词><主题>by<断言>
 
 查询动词：get/read/find/count
@@ -77,12 +79,28 @@ JPA的某一个接口，自动生成实现（org.springframework.data.jpa.reposi
 
 - 声明自定义查询
 
+自动实现
+
 @Query
 
+例如：
+
+```java
+// mongoDB
+@Query("{'customer':'Chuck Wagon','type':?0}")
+List<Order> findChucksOrders(String type);
+```
+
 - 混合自定义
+
+自定义接口，需要自己实现
 
 //默认：repositoryImplementationPostfix="Impl"
 
 <SpringDataJpaRepository接口>Impl
 
+```java
 @PersistenceContext
+private EntityManager em;
+```
+
