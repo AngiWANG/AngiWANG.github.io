@@ -6,15 +6,39 @@ categories: Java
 tags: database jpa java
 ---
 
-[MyBatis Generator (MBG)](http://www.mybatis.org/generator/)
+[MyBatis Generator (MBG)](http://www.mybatis.org/generator/) is a code generator for MyBatis or iBatis (>2.2.0).
+
+可以生成如下内容：
+
+1. Java POJOs，具体方式取决与`defaultModelType`，对应`<javaModelGenerator>`配置
+
+- a class to match the primary key of the table (if there is a primary key)
+- a class to match the non-primary key fields of the table (except BLOB fields)
+- a class to include the BLOB fields of a table (if the table has BLOB fields)
+- a class to enable dynamic selects, updates, and deletes
+
+2. SQL Map XML Files，对应`<sqlMapGenerator>`配置
+
+- insert
+- update by primary key
+- update by example (using a dynamic where clause)
+- delete by primary key
+- delete by example (using a dynamic where clause)
+- select by primary key
+- select by example (using a dynamic where clause)
+- count by example
+
+3. Java client classes，对应`<javaClientGenerator>`配置
+
+* A mapper interface that works with the MyBatis 3.x mapper infrastructure
 
 ## generatorConfig.xml
 
-### <classPathEntry>
+### `<classPathEntry>`
 
-### <context>
+### `<context>`
 
-defaultModelType：生成model类型，默认值conditional，建议设置为`flat`
+`defaultModelType：`生成model类型，默认值conditional，建议设置为`flat`
 
 * conditional：跟hierarchical类似，只是当表只有一个主键时，不生成其他类
 * flat：一个表一个domain类
@@ -24,21 +48,21 @@ defaultModelType：生成model类型，默认值conditional，建议设置为`fl
 
 targetRuntime：
 
-#### <properties>
+#### `<properties>`
 
-#### <plugin>
+#### `<plugin>`
 
-#### <commentGenerator>
+#### `<commentGenerator>`
 
 suppressDate：是否包含时间戳，默认值false，避免重复生成后时间戳的变化导致版本变化，建议设置为true
 
 addRemarkComments：是否包含表和字段的备注，默认值false，建议设置为true
 
-####　<connectionFactory>
+####　`<connectionFactory>`
 
-#### <jdbcConnection>
+#### `<jdbcConnection>`
 
-#### <javaTypeResolver>
+#### `<javaTypeResolver>`
 
 forceBigDecimals：是否强制`DECIMAL`和`NUMERIC`类型的字段转换为Java类型的`java.math.BigDecimal`,默认值为`false`
 
@@ -49,25 +73,35 @@ forceBigDecimals：是否强制`DECIMAL`和`NUMERIC`类型的字段转换为Java
 3. 如果`精度=0`并且`5<=长度<=9`，就会使用`java.lang.Integer`
 4. 如果`精度=0`并且`长度<5`，就会使用`java.lang.Short`
 
-#### <javaModelGenerator>
+#### `<javaModelGenerator>`
 
-**targetProject：**This is used to specify a target project for the generated objects.  绝对路径或相对路径，不自动创建目录，关于相对目录，不同运行方式规则不一样，命令行和maven方式，相对项目根目录，比如：`src/main/java`，eclipse plug-in方式，相对工作空间，前面追加项目名称，比如：`sample-mybatis-generator-maven/src/main/java`
+**targetProject：**绝对路径或相对路径，不自动创建目录，关于相对目录，不同运行方式规则不一样，命令行和maven方式，相对项目根目录，比如：`src/main/java`，eclipse plug-in方式，相对工作空间，前面追加项目名称，比如：`sample-mybatis-generator-maven/src/main/java`
 
-**targetPackage：**This is the package where the generated classes will be placed.  In the default generator, the property "enableSubPackages" controls how the actual package is calculated.  If true, then the alculated package will be the targetPackage plus sub packages for the table's catalog and schema if they exist. If false (the default) then the calculated package will be exactly what is specified in the targetPackage attribute.      MyBatis Generator will create folders as required for the generated packages.会自动创建目录
+**targetPackage：**会自动创建目录
 
-#### <sqlMapGenerator>
+#### `<sqlMapGenerator>`
 
-#### <javaClientGenerator>
+#### `<javaClientGenerator>`
 
-#### <table>
+#### `<table>`
 
 tableName：表名，支持SQL通配符，比如%
+
+##### `<generatedKey>`
+
+**identity：**，是否是数据库自动自增生成，true一般适用于mysql或sql server，false一般使用于使用sequence之类的数据库，比如oracle
+
+```xml
+<generatedKey column="id" sqlStatement="MySql" identity="true" />
+```
+
+
 
 ## 运行
 
 ### 命令行
 
-项目下任意目录新建`generatorConfig.xml`，执行如下命令：
+项目下任意位置新建`generatorConfig.xml`，执行如下命令：
 
 ```shell
 $ java -jar mybatis-generator-core-1.3.6.jar -configfile src/maing/resources/generatorConfig.xml -overwrite
