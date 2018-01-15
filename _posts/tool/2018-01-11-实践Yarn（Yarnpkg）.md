@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "实践Yarn(Yarnpkg)"
+title: "实践Yarn（Yarnpkg）"
 date: 2017-08-07 15:58:13 +0800
 categories: 工具
 tags: yarn yarnpkg tool software package

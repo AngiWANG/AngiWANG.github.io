@@ -14,9 +14,9 @@ tags: database jpa java
 
 ### <context>
 
-defaultModelType：生成model类型，默认值conditional，建议flat
+defaultModelType：生成model类型，默认值conditional，建议设置为`flat`
 
-* conditional：跟hierarchical类似，
+* conditional：跟hierarchical类似，只是当表只有一个主键时，不生成其他类
 * flat：一个表一个domain类
 * hierarchical：生成多个类，`主键`一个，`Blob`字段共一个类，其他字段共一个类
 
