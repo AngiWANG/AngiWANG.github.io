@@ -16,6 +16,13 @@ JdbcOperations
 
 ### JdbcTemplate
 
+`JdbcTemplate`主要包含如下方法：
+
+1. execute()：一般用于执行DDL
+2. update() and batchUpdate()，一般用于执行新增、删除和修改数据
+3. query() and queryFor*()，一般用于执行查询数据
+4. call()，一般用于执行存储过程和函数
+
 KeyHolder
 
 RowMapper
@@ -35,6 +42,8 @@ delete from BookInfo where bid =?
 
 
 ### NamedParameterJdbcTemplate
+
+基于`JdbcTempate`封装从而支持命名参数特性
 
 #### SqlParameterSource
 

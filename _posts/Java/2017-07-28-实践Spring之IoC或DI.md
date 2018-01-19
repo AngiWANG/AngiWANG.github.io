@@ -22,6 +22,10 @@ AnnotationConfigApplicationContext
 
 AnnotationConfigWebApplicationContext：适用于web项目
 
+BeanFactoryPostProcessor
+
+实例化bean的方法：实例工厂、静态工厂和构造器
+
 ## 基于XML
 
 ### `<import/>`

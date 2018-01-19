@@ -129,7 +129,7 @@ $ mvn spring-boot:run
 
 ## layout=ZIP
 
-默认可执行的archive会自包含依赖，导致archive体积都会很大，某些场景下不太适合，这时可以将依赖放到外部，这些基本不变。layout设定为ZIP，同时将依赖exclude，这样repackage的archive也是可执行的，只是不再自包含依赖。
+默认可执行的archive会自包含依赖，导致archive体积都会很大，某些场景下不太适合，这时可以将依赖放到外部，其他基本不变。layout设定为ZIP，同时将依赖exclude，这样repackage的archive也是可执行的，只是不再自包含依赖。
 
 ```xml
 <plugin>

@@ -45,7 +45,7 @@ URL路径和配置文件的映射关系：
 
 http://192.168.70.139:9999/cts-hello-client/default
 
-http://192.168.70.139:9999/cts-hello-client.properties
+http://192.168.70.139:9999/cts-hello-client-default.properties
 
 
 
