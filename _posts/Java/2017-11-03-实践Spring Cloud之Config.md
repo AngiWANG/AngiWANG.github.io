@@ -151,7 +151,77 @@ spring:
 
 
 
-### 加密解密
+### 加密
+
+需要安装Unlimited Strength Java Cryptography Extension
+
+特有端点：
+
+/encrypt/status
+
+/key
+
+/encrypt
+
+/decrypt
+
+#### 对称加密
+
+* 配置对称密钥
+
+在配置中心的bootstrap.properties中配置如下：
+
+```properties
+encrypt.key=abcdef123456
+```
+
+* 查看服务状态
+
+访问：http://localhost:9999/encrypt/status
+
+* 加密
+
+```shell
+$ curl localhost:9999/encrypt -d password123
+b635dbd39bf17d98817270e4229524b42134890d99a3f4aa28cc850fe433e7b6
+```
+
+* 配置
+
+```properties
+passpord={cipher}*
+```
+
+* 解密
+
+```shell
+$ curl http://config:config2017@localhost:9999/decrypt -d b635dbd39bf17d98817270e4229524b42134890d99a3f4aa28cc850fe433e7b6
+password123
+```
+
+#### 非对称加密
+
+* 配置非对称密钥
+
+生产密钥库（利用JDK自带的keytool工具），然后配置如下：
+
+```properties
+# keystore的位置
+encrypt.key-store.location=/app/
+# keystore的密码
+encrypt.key-store.password=
+# key的别名
+encrypt.key-store.alias=
+# key的密码
+encrypt.key-store.secret=
+
+```
+
+
+
+
+
+其他跟对称密钥类同
 
 ### 高可用
 

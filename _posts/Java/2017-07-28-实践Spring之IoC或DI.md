@@ -46,6 +46,23 @@ BeanFactoryPostProcessor
 
 @Entity
 
+依赖注入注解
+
+@Autowired
+
+Spring4新增泛型注入支持，例如：
+
+```java
+public abstract class BaseService<T> implements IService<T> {
+
+    @Autowired
+    protected Mapper<T> mapper;
+...
+}
+```
+
+
+
 ## 基于Java Config
 
 ### @Configuration

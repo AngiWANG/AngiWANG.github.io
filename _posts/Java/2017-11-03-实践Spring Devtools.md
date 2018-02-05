@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "实践Spring Boot Actuator"
+title: "实践Spring Devtools"
 date: 2017-11-03 11:08:00 +0800
 categories: Java
-tags: spring spring-boot-actuator java
+tags: spring spring-devtools java spring-boot
 ---
 

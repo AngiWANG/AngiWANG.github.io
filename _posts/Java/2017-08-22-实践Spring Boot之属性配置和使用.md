@@ -137,13 +137,14 @@ private String name;
 
 ### @ConfigurationProperties
 
-为了能够更加方便的分门别类的定义和使用属性，@ConfigurationProperties能够将相关属性自动绑定到Java Bean【通常称为配置类】，会自动进行类型转换，还支持嵌套属性。使用配置类有两种方式，一种是用@Component定义配置bean，另一种是使用@EnableConfigurationProperties。
+为了能够更加方便的分门别类的定义和使用属性，@ConfigurationProperties能够将相关属性自动绑定到Java Bean【通常称为属性配置类】，会自动进行类型转换，还支持嵌套属性。使用配置类有三种方式，第一种是用@Component定义配置bean，第二种是绑定到@Bean上面，第三种是使用@EnableConfigurationProperties。
 
-应用于Java Bean：
+Note that contrary to `@Value`, SpEL expressions are not evaluated since property values are externalized.
+
+Java Bean属性配置类：
 
 ```java
-@ConfigurationProperties(prefix="my")
-public class Config {
+public class ServerProperties {
     private String name;
     private Integer port;
     private List<String> servers = new ArrayList<String>();
@@ -161,7 +162,7 @@ public class Config {
 }
 ```
 
-Java Bean Config对应的配置如下：
+对应的配置如下：
 
 ```properties
 my.name=Isea533
@@ -170,17 +171,27 @@ my.servers[0]=dev.bar.com
 my.servers[1]=foo.bar.com
 ```
 
-也可以直接绑定到@Bean，例如：
+第一种：在属性配置类类上加如下注解
+
+```java
+@Component
+@ConfigurationProperties(prefix="my")
+public class ServerProperties {
+// omitted for readability
+}
+```
+
+第二种：绑定到@Bean，一般用于第三方Properties类【他们没有被@ConfigurationProperties注解】，例如：
 
 ```java
 @ConfigurationProperties(prefix = "foo")
 @Bean
-public Config configComponent() {
+public ServerProperties createServerProperties() {
     ...
 }
 ```
 
-### @EnableConfigurationProperties
+第三种：参见[@EnableConfigurationProperties](http://angi.wang/2017/08/06/实践Spring-Enable系列之EnableConfigurationProperties.html)
 
 ### 属性占位符
 

@@ -12,9 +12,9 @@ tags: database jpa java
 
 1. Java POJOs（domain），具体形式取决于`defaultModelType`，对应`<javaModelGenerator>`配置
 
-- a class to match the primary key of the table (if there is a primary key)
-- a class to match the non-primary key fields of the table (except BLOB fields)
-- a class to include the BLOB fields of a table (if the table has BLOB fields)
+- a class to match the primary key of the table (if there is a primary key)【主键实体类】
+- a class to match the non-primary key fields of the table (except BLOB fields)【基础实体类】
+- a class to include the BLOB fields of a table (if the table has BLOB fields)【Blob实体类】
 - a class to enable dynamic selects, updates, and deletes
 
 2. SQL Map XML Files，对应`<sqlMapGenerator>`配置
@@ -51,7 +51,7 @@ tags: database jpa java
 
 `defaultModelType：`生成model类型，默认值conditional，建议设置为`flat`
 
-* conditional：跟hierarchical类似，只是当表只有一个主键时，不生成其他类
+* conditional：跟hierarchical类似，只是当表只有一个主键时，不生成基础实体类
 * flat：一个表一个domain类
 * hierarchical：生成多个类，`主键`一个，`Blob`字段共一个类，其他字段共一个类
 
