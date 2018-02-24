@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "《深入理解Bootstrap》读书笔记"
+title: "实践Bootstrap"
 date: 2018-01-29 09:03:13 +0800
 categories: 移动互联网
 tags: bootstrap javascript web mobile
 ---
 
-作者徐涛，基于Bootstrap 3.1.0
+
 
 
 
@@ -39,7 +39,9 @@ user-scalable=no
 
 maximum-scale=1.0
 
-## 栅格系统
+## CSS布局
+
+### 栅格系统
 
 |                   | 超小屏幕-手机 (<768px) | 小屏幕-平板 (≥768px)            | 中等屏幕-桌面显示器 (≥992px)        | 大屏幕-大桌面显示器 (≥1200px)       |
 | ----------------- | ---------------- | -------------------------- | -------------------------- | -------------------------- |
@@ -147,7 +149,25 @@ maximum-scale=1.0
 </div> 
 ```
 
-## 组件
+### 排版
+
+### 代码
+
+### 表格
+
+### 表单
+
+### 按钮
+
+### 图像
+
+### 辅助样式
+
+### 响应式样式
+
+## 组件（Components）
+
+合计20种
 
 ### 小图标
 
@@ -182,8 +202,6 @@ dropdown trigger：下拉菜单触发器
 .dropdown-header
 
 .divider
-
-### 按钮
 
 ### 按钮组
 
@@ -261,21 +279,52 @@ dropdown trigger：下拉菜单触发器
 
 .pagination
 
-## JavaScript插件架构
+## JavaScript插件
 
-HTML布局规则：插件通过设定HTML代码和相应的属性（或自定义属性）来实现，JavaScript代码会自动检测这些标记，并自动绑定相应的事件，而无需再添加额外的JavaScript代码。
+合计12种
 
-data-toggle：
+* HTML布局规则
 
-alert：data-dismiss
+  插件通过设定HTML代码和相应的属性（或自定义属性）来实现，JavaScript代码会自动检测这些标记，并自动绑定相应的事件，而无需再添加额外的JavaScript代码。
 
-dropdown：data-target
+**data-toggle**：打开的目标组件，比如打开dropdown，打开modal等
+
+**data-dismiss**：关闭的目标组件，比如关闭alert，关闭modal等
+
+**data-target**：组件目标，#id或样式等，**默认父组件**
+
+```javascript
+// 禁用所有data-api，此时可以适用JavaScript来调用插件
+$(document).off('.data-api');
+// 禁用指定data-api
+$(document).off('.alert.data-api');
+```
 
 
 
-JavaScript实现步骤：
+* JavaScript实现步骤
 
 插件调用方法：HTML声明式或JavaScript调用式
+
+### 模态弹窗
+
+data-api：
+
+```html
+<!-- 打开modal，data-toggle="modal" data-target="#myModal" -->
+<button type="button" class="btn" data-toggle="modal" data-target="#myModal">data-api modal</button>
+
+<!-- 关闭modal，data-dismiss="modal" -->
+<button type="button" class="close" data-dismiss="modal">&times;</button>
+```
+
+JavaScript：
+
+```javascript
+$("#btn_modal").click(function () {
+	$("#myModal1").modal();
+});
+```
 
 ### 下拉菜单
 
@@ -294,3 +343,14 @@ JavaScript实现步骤：
 </div>
 ```
 
+JavaScript调用为啥也需要data-toggle="dropdown"呢？
+
+### 警告框插件
+
+
+
+## 相关书籍
+
+《深入理解Bootstrap》，徐涛，基于Bootstrap 3.1.0
+
+《Bootstrap实战》，作者成林，基于Bootstrap 2.3.1
