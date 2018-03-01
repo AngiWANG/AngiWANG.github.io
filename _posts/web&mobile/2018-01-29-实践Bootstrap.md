@@ -294,7 +294,7 @@ dropdown trigger：下拉菜单触发器
 **data-target**：组件目标，#id或样式等，**默认父组件**
 
 ```javascript
-// 禁用所有data-api，此时可以适用JavaScript来调用插件
+// 禁用所有data-api，此时可以使用JavaScript来调用插件
 $(document).off('.data-api');
 // 禁用指定data-api
 $(document).off('.alert.data-api');
