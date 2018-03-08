@@ -3,7 +3,7 @@ layout: post
 title: "实践Spring Enable系列之EnableAspectJAutoProxy"
 date: 2017-08-05 13:41:00 +0800
 categories: Java
-tags: spring AspectJ proxy
+tags: spring AspectJ proxy aop
 ---
 
 ```java
@@ -20,7 +20,7 @@ public @interface EnableAspectJAutoProxy {
 
 切点（PointCut）：拦截规则，一般分为基于方法（execution）或基于注解（@PointCut）
 
-建言（Advice）：拦截植入的动作，@Before、@After和@Around
+建言（Advice）：拦截植入的时机及动作，@Before、@After和@Around
 
 连接点（JoinPoint）：符合拦截规则的每一个被拦截处
 

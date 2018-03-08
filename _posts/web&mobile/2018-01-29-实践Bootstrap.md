@@ -74,10 +74,10 @@ maximum-scale=1.0
 ```html
 <div class="container">
 	<div class="row">
-      	<div class="col-sm-4">.col-sm-4</div>
-      	<div class="col-sm-4">.col-sm-4</div>
-      	<div class="col-sm-4">.col-sm-4</div>
-  	</div>
+		<div class="col-sm-4">.col-sm-4</div>
+		<div class="col-sm-4">.col-sm-4</div>
+		<div class="col-sm-4">.col-sm-4</div>
+	</div>
 </div>   
 ```
 
@@ -89,7 +89,7 @@ maximum-scale=1.0
 
 .row：行，每行12列，超过则换行，高度由内容自动决定
 
-.col-*-：列
+.col-${media}-n：列
 
 列合并
 

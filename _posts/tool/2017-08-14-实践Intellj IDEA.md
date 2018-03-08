@@ -20,27 +20,27 @@ Line spacing: 1.2
 
 ### 快捷键
 
-| 快捷键          | 功能              |
-| ------------ | --------------- |
-| Ctrl+I       | 自助接口实现选择和生成     |
-| Ctrl+O       | 自助Override选择和生成 |
-| Ctrl+Shift+L | 格式化             |
-|              |                 |
-|              |                 |
-|              |                 |
-|              |                 |
-|              |                 |
-|              |                 |
-|              |                 |
-|              |                 |
-|              |                 |
-|              |                 |
-|              |                 |
-|              |                 |
-|              |                 |
-|              |                 |
-|              |                 |
-|              |                 |
+| 快捷键            | 功能              |
+| -------------- | --------------- |
+| Ctrl+I         | 自助接口实现选择和生成     |
+| Ctrl+O         | 自助Override选择和生成 |
+| Ctrl+Shift+L   | 格式化             |
+|                |                 |
+| F8             | step over       |
+| F7             | step into       |
+| alt+shift+F7   | force step into |
+| shift+F8       | step out        |
+| F9             | resume program  |
+| alt+F9         | run to cursor   |
+|                |                 |
+| shift+F6       | rename          |
+| alt+enter      | import          |
+| alt+insert     | generate        |
+|                |                 |
+|                |                 |
+|                |                 |
+|                |                 |
+| ctrl+shift+F10 | run             |
 
 ###  Edition Comparison
 
