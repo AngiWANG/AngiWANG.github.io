@@ -8,6 +8,15 @@ tags: memcached nosql
 
 
 
+## deepin
+
+```shell
+$ apt install memcached
+$ sudo systemctl start memcached
+```
+
+
+
 1、根据系统情况，修改memcached文件中的用户名为相应应用用户（建议非root），参考：
 ......
 $memcached_path -m $memcached_memory -l 0.0.0.0 -p 11211 -u itsapp -d -P $memcached_pid 

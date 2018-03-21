@@ -1,16 +1,15 @@
 ---
 layout: post
-title: "实践MySQL Router（Proxy）"
+title: "实践数据库中间件之MySQL Router（Proxy）"
 date: 2017-11-14 14:05:00 +0800
 categories: 数据库
 tags: redis mysql
 ---
 
 
-[Amoeba使用指南](http://docs.hexnova.com/amoeba/)
+[MySQL Proxy](https://downloads.mysql.com/archives/proxy/)
 
-http://blog.csdn.net/kingzone_2008/article/details/51513910
-
+[MySQL Router](https://dev.mysql.com/downloads/router/)
 
 ## 相关书籍
 

@@ -5,8 +5,6 @@ date: 2018-02-25 11:08:00 +0800
 categories: Java
 tags: java Lambda
 ---
-## Lambda介绍
-
 Lambda表达式（λ）本质上可以看做匿名函数，例如函数：
 
 ```java
@@ -25,178 +23,32 @@ public int add(int x, int y) {
 (x, y) -> { return x + y; } 
 ```
 
-可见Lambda表达式由三部分组成：`参数列表`，`箭头（->）`，以及一个`表达式或语句块`。
+可见Lambda表达式由三部分组成：`参数列表`，`箭头（->）`，以及一个`表达式`或`语句块`。
 
 ```java
 // 没有参数，也没有返回值（比如：Ruuable的run方法）
-() -> { System.out.println("Hello Lambda!"); }
+() -> System.out.println("Hello Lambda!");
 // 只有一个参数且参数类型可以省略时，参数括号可以不要
 c -> { return c.size(); }
 ```
 
-## Lambda类型
+Java8加入了对Lambda表达式（λ）的支持，Lambda表达式的`目标类型（target type）`是`函数接口（function interface）`，适用于函数接口，详细使用参见[实践Java8之函数接口（@FunctionalInterface）](/2018/02/25/实践Java8之函数接口-@FunctioinInterface.html)
 
-Java8加入了对Lambda表达式（λ）的支持，Lambda表达式的`目标类型（target type）`是`函数接口（function interface）`。
+## Method References
 
-```
-一个接口，如果只有一个显式声明的抽象方法，那么它就是一个函数接口
-```
+有时候Lambda表达式仅仅是调用一个已经存在的方法，此时`method reference`可以简化调用。
 
-一般用注解`@FunctionalInterface`标注（非必须），例如：
-
-```java
-package java.lang;
-@FunctionalInterface
-public interface Runnable {
-    public abstract void run();
-}
-```
-
-Lambda表达式也可以被看做是一个Object，前提是必须转型为一个函数接口，例如：
-
-```java
-// ERROR! Object is not a functional interface!
-Object obj = () -> {System.out.println("Hello Lambda!");}; 
-// 先转型为具体的函数接口
-Runnable r1 = () -> {System.out.println("Hello Lambda!");};
-Object obj = r1;
-// 或者直接强转
-Object o = (Runnable) () -> { System.out.println("hi"); };
-```
-
-JDK预定义了一些函数接口，比如：`Function`、`Supplier`、`Consumer`和`Predicate`、`UnaryOperator`等
-
-## Lambda使用
-
-### 基本用法
-
-```java
-// 嵌套的λ表达式
-Callable<Runnable> c1 = () -> () -> { System.out.println("Nested lambda"); };
-c1.call().run();
-```
-
-### 内部类
-
-Lambda表达式主要用于替换以前广泛使用的内部匿名类，比如回调和Runnable等。
-
-```java
-// 传统
-Thread oldSchool = new Thread( new Runnable () {
-	@Override
-    public void run() {
-        System.out.println("This is from an anonymous class.");
-    }
-});
-// 使用Lambda表达式
-Thread gaoDuanDaQiShangDangCi = new Thread( () -> {
-  	System.out.println("This is from an anonymous method (lambda exp).");
-} );
-```
-
-### 集合类批处理操作
-
-```java
-// 传统
-for(Object o: list) {
-	System.out.println(o);
-}
-// 使用Lambda表达式
-list.forEach(o -> {System.out.println(o);});
-```
-
-
-
-```java
-// 挑出蓝色的，然后将这些蓝色的物体喷成红色
-public void findBlueAndToRed(String... numbers) {
-    List<Shape> shapes = Arrays.asList(numbers);
-    shapes.stream()
-      .filter(s -> s.getColor() == BLUE)
-      .forEach(s -> s.setColor(RED));
-}
-```
-
-
-
-```java
-// 并行处理
-shapes.parallelStream(); // 或shapes.stream().parallel()
-```
-
-
-
-```java
-// 给出一个String类型的数组，找出其中所有不重复的素数
-public void distinctPrimary(String... numbers) {
-	List<String> l = Arrays.asList(numbers);
-	List<Integer> r = l.stream()
-      .map(e -> new Integer(e))
-      .filter(e -> Primes.isPrime(e))
-      .distinct()
-      .collect(Collectors.toList());
-	System.out.println("distinctPrimary result is: " + r);
-}
-```
-
-
-
-```java
-// 给出一个String类型的数组，找出其中各个素数，并统计其出现次数
-public void primaryOccurrence(String... numbers) {
-	List<String> l = Arrays.asList(numbers);
-	Map<Integer, Integer> r = l.stream()
-      .map(e -> new Integer(e))
-      .filter(e -> Primes.isPrime(e))
-      .collect( Collectors.groupingBy(p->p, Collectors.summingInt(p->1)) );
-	System.out.println("primaryOccurrence result is: " + r);
-}
-```
-
-
-
-```java
-//给出一个String类型的数组，求其中所有不重复素数的和
-public void distinctPrimarySum(String... numbers) {
-	List<String> l = Arrays.asList(numbers);
-    int sum = l.stream()
-      .map(e -> new Integer(e))
-      .filter(e -> Primes.isPrime(e))
-      .distinct()
-      .reduce(0, (x,y) -> x+y); // equivalent to .sum()
-    System.out.println("distinctPrimarySum result is: " + sum);
-}
-```
-
-
-
-```java
-// 统计年龄在25-35岁的男女人数、比例
-public void boysAndGirls(List<Person> persons) {
-    Map<Integer, Integer> result = persons.parallelStream()
-      .filter(p -> p.getAge()>=25 && p.getAge()<=35).
-      collect(Collectors.groupingBy(p->p.getSex(), Collectors.summingInt(p->1)));
-    System.out.print("boysAndGirls result is " + result);
-    System.out.println(", ratio (male : female) is " +(float)result.get(Person.MALE)/result.get(Person.FEMALE));
-}
-```
-
-
-
-### 函数式编程
-
-`stream`：一个流通常以一个集合类实例为其数据源，然后在其上定义各种操作。
-
-`pipeline`：流的API设计使用了管道（pipelines）模式，对流的一次操作会返回另一个流。
-
-`lazy`：不会实时执行（管道贯通式）。
-
-`eager`：实时执行，并且会触发lazy的执行。
-
-forEach(Consumer)，map(Function)，filter(Predicate)，distinct()，toMap(Function, Function)，groupBy(Function, Collector)，
-
-reduce()，sum()，max()，min()
+| Kind                                     | Example                                |
+| ---------------------------------------- | -------------------------------------- |
+| Reference to a static method             | `ContainingClass::staticMethodName`    |
+| Reference to an instance method of a particular object | `containingObject::instanceMethodName` |
+| Reference to an instance method of an arbitrary object of a particular type | `ContainingType::methodName`           |
+| Reference to a constructor               | `ClassName::new`                       |
 
 ## 参考
 
+[Lambda](https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html)
+
 [Java8 Lambda表达式教程](http://blog.csdn.net/ioriogami/article/details/12782141)
+
+[Method References](https://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html)

@@ -62,7 +62,7 @@ tags: spring-mvc
 
 ### View
 
-对具体视图页面的封装，比如jsp/freemarker/velocity/
+对具体视图页面的封装，比如jsp/freemarker/velocity/thymeleaf/beetl/handlebars/mustache/rocker
 
 ## HttpMessageConverter
 
@@ -76,7 +76,7 @@ http输入/输出转换，比如JSON或XML等的数据输入/输出转换，一�
 
 表单数据或URL请求参数（均为字符串）自动绑定到**命令对象**，会自动进行类型**转换**或**格式化**（内置或自定义组件），以及手工加入的**验证**。
 
-BindingResult：绑定结果（包含转换、格式化和验证），功能方法添加其作为入参，如果有错误，页面可以进行显示（<form:errros/>），例如：
+BindingResult：绑定结果（包含转换、格式化和验证），功能方法添加其作为入参，如果有错误，页面可以进行显示（`<form:errros/>`），例如：
 
 ```java
 @RequestMapping(value = "/save-book")
@@ -97,7 +97,7 @@ public String saveBook(@ModelAttribute Book book, BindingResult bindingResult) {
 }
 ```
 
-```jsp
+```xml
 <p class="errorLine">
 	<form:errors path="price" cssClass="error"/>
 </p>
@@ -108,8 +108,6 @@ public String saveBook(@ModelAttribute Book book, BindingResult bindingResult) {
 ### 命令对象（Command）
 
 封装请求参数的DTO，比如表单数据
-
-表单对象（form object）
 
 表单对象（form object）
 

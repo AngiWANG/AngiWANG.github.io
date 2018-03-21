@@ -167,7 +167,7 @@ maximum-scale=1.0
 
 ## 组件（Components）
 
-合计20种
+合计20种，其中有5种与JavaScript插件相关
 
 ### 小图标
 
@@ -296,7 +296,7 @@ dropdown trigger：下拉菜单触发器
 ```javascript
 // 禁用所有data-api，此时可以使用JavaScript来调用插件
 $(document).off('.data-api');
-// 禁用指定data-api
+// 禁用指定data-api，例如：
 $(document).off('.alert.data-api');
 ```
 
@@ -352,5 +352,3 @@ JavaScript调用为啥也需要data-toggle="dropdown"呢？
 ## 相关书籍
 
 《深入理解Bootstrap》，徐涛，基于Bootstrap 3.1.0
-
-《Bootstrap实战》，作者成林，基于Bootstrap 2.3.1
