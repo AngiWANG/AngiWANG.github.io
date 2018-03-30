@@ -6,16 +6,90 @@ categories: Java
 tags: java pipeline stream
 ---
 
-Java8新增的Stream是对Collections的一个增强，专注于对集合对象的便利，高效的聚合操
-作，不仅支持串行的操作功能，而且还借助Java7中的Fork-Join机制支持了并行模式。
+Java8新增的Stream是对Collections的一个增强，专注于对集合对象的便利和高效的聚合操作，不仅支持串行的操作功能，而且还借助Java7中的Fork-Join机制支持了并行模式。
 
-method expression
+一个Stream通常是以一个集合类实例为其数据源，然后在其上定义各种操作。对 Stream 的使用就是实现一个 filter-map-reduce 过程,产生一个最终结果,或者导致一个副作用(side effect)。流的API设计使用了管道（pipelines）模式，对流的一次操作会返回另一个流。
 
-String::toLowerCase
+## 获取Stream
 
-```
+## Stream分类
 
-```
+* Intermediate
+
+  一个流可以后面跟随零个或多个 intermediate 操作。其目的主要是打开流,做出某种程度的数据映射/过滤,然后返回一个新的流,交给下一个操作使用。这类操作都是`惰性化的（lazy）`,就是说,仅仅调用到这类方法,并没有真正开始流的遍历。
+
+* terminal
+
+  一个流只能有一个 terminal 操作,当这个操作执行后,流就被使用“光”了,无法再被操作。所以这必定是流的最后一个操作。Terminal 操作的执行,才会真正开始流的遍历,并且会生成一个结果,或者一个 side effect。
+
+## 操作Stream
+
+### Intermediate
+
+#### map(Function)
+
+one to one
+
+#### flatMap(Function)
+
+one to many
+
+#### mapToInt(Function)
+
+#### toMap(Function, Function)
+
+#### filter(Predicate)
+
+#### distinct()
+
+去重
+
+#### sorted()
+
+升序排列
+
+#### sorted(Comparator)
+
+自定义排序
+
+#### peek(Consumer)
+
+类似forEach，只是不中断流
+
+#### limit(long)
+
+#### skip(long)
+
+#### parallel()
+
+返回并行流
+
+#### sequential()
+
+返回串行流
+
+#### unordered()
+
+### Terminal
+
+#### forEach(Consumer)
+
+#### forEachOrdered(Consumer)
+
+ toArray
+ Reduce
+ Collect
+ Min
+ Max
+ Count
+ anyMatch
+ allMatch
+ noneMatch
+ findFirst
+ findAny
+ iterator
+
+#### groupBy(Function, Collector)
 
 
 
@@ -113,15 +187,3 @@ public void boysAndGirls(List<Person> persons) {
     System.out.println(", ratio (male : female) is " +(float)result.get(Person.MALE)/result.get(Person.FEMALE));
 }
 ```
-
-`stream`：一个流通常以一个集合类实例为其数据源，然后在其上定义各种操作。
-
-`pipeline`：流的API设计使用了管道（pipelines）模式，对流的一次操作会返回另一个流。
-
-`lazy`：不会实时执行（管道贯通式）。
-
-`eager`：实时执行，并且会触发lazy的执行。
-
-forEach(Consumer)，map(Function)，filter(Predicate)，distinct()，toMap(Function, Function)，groupBy(Function, Collector)，
-
-reduce()，sum()，max()，min()

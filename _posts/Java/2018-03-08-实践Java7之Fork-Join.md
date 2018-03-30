@@ -6,4 +6,20 @@ categories: Java
 tags: java fork-join
 ---
 
-[Reactor](http://projectreactor.io/) is a fourth-generation Reactive library for building non-blocking applications on the JVM based on the [Reactive Streams Specification](https://github.com/reactive-streams/reactive-streams-jvm)
+ForkJoin，并行计算框架
+
+## ForkJoinTask
+
+![ForkJoinTask](/images/ForkJoinTask.png)
+
+### RecursiveTask
+
+### RecursiveAction
+
+
+
+## ForkJoinPool
+
+![ForkJoinPool](/images/ForkJoinPool.png)
+
+daemon为true

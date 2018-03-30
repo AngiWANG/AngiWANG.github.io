@@ -37,7 +37,7 @@ Object obj = r1;
 Object o = (Runnable) () -> { System.out.println("hi"); };
 ```
 
-JDK预定义了一些函数接口，比如：`Runnable`、`Callable`、`Function`、`Supplier`、`Consumer`和`Predicate`、`UnaryOperator`等
+JDK预定义了一些函数接口，比如：`Runnable`、`Callable`、`Function`、`Supplier`、`Consumer`、`BiComsumer`和`Predicate`、`UnaryOperator`等
 
 ## 使用
 

@@ -6,6 +6,8 @@ categories: Java
 tags: spring-boot-maven-plugin spring-boot maven
 ---
 
+## 介绍
+
 [The Spring Boot Maven Plugin](https://docs.spring.io/spring-boot/docs/current/maven-plugin/index.html) Plugin provides Spring Boot support in Maven, allowing you to package 
 executable jar or war archives and run an application “in-place”.
 
@@ -28,9 +30,11 @@ spring-boot-starter-parent的`<pluginManagement/>`下定义了spring-boot-maven-
 </plugin>
 ```
 
+包含有多个goal，比如：`repackage`、`run`、`start`、`stop`和`buid-info`
 
+## goals
 
-## repackage
+### repackage
 
 [repackage](https://docs.spring.io/spring-boot/docs/current/maven-plugin/repackage-mojo.html)，顾名思义，再打包，默认再打包成一个可执行的archive（包含依赖（compile，runtime，provide，非test，非system）），原打包的archive被重命名（后面追加.original），绑定到maven的package阶段
 
@@ -89,9 +93,7 @@ Implementation-URL: http://projects.spring.io/spring-boot/cts-parent/c
  ts-hello-client/
 ```
 
-
-
-## run
+### run
 
 [spring-boot:run](https://docs.spring.io/spring-boot/docs/current/maven-plugin/run-mojo.html) spring boot应用。
 
@@ -105,9 +107,7 @@ $ mvn spring-boot:run
 | jvmArguments | User property: run.jvmArguments          |       |
 |              |                                          |       |
 
-### 
-
-## start
+### start
 
 [start](https://docs.spring.io/spring-boot/docs/current/maven-plugin/start-mojo.html)
 
@@ -117,17 +117,17 @@ $ mvn spring-boot:run
 |      |      |      |
 |      |      |      |
 
-
-
-## stop
+### stop
 
 [stop](https://docs.spring.io/spring-boot/docs/current/maven-plugin/stop-mojo.html)
 
-## build-info
+### build-info
 
 [spring-boot:build-info](https://docs.spring.io/spring-boot/docs/current/maven-plugin/build-info-mojo.html) generates build information that can be used by the Actuator.
 
-## layout=ZIP
+## 参数
+
+### layout
 
 默认可执行的archive会自包含依赖，导致archive体积都会很大，某些场景下不太适合，这时可以将依赖放到外部，其他基本不变。layout设定为ZIP，同时将依赖exclude，这样repackage的archive也是可执行的，只是不再自包含依赖。
 

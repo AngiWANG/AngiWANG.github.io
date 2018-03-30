@@ -45,6 +45,17 @@ Java8加入了对Lambda表达式（λ）的支持，Lambda表达式的`目标类
 | Reference to an instance method of an arbitrary object of a particular type | `ContainingType::methodName`           |
 | Reference to a constructor               | `ClassName::new`                       |
 
+例如：
+```java
+button.setOnAction(System.out::println);
+// 等价于如下lambda表达式
+button.setOnAction(event->System.out.println(event));
+
+Arrays.sort(strings, String::compareToIgnoreCase);
+```
+
+
+
 ## 参考
 
 [Lambda](https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html)
