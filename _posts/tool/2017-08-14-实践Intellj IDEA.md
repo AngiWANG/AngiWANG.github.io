@@ -25,7 +25,7 @@ Line spacing: 1.2
 | Ctrl+I         | 自助接口实现选择和生成     |
 | Ctrl+O         | 自助Override选择和生成 |
 | Ctrl+Shift+L   | 格式化             |
-|                |                 |
+| Ctrl+Q         | 查看注释            |
 | F8             | step over       |
 | F7             | step into       |
 | alt+shift+F7   | force step into |

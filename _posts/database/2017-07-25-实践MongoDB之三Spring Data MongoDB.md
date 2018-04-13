@@ -6,4 +6,14 @@ categories: 数据库
 tags: document-database nosql mongodb database
 ---
 
-org.springframework.data.mongodb.repository.support.SimpleMongoRepository<T, ID>
+![spring-data-MongoRepository](/images/spring-data-MongoRepository.png)
+
+
+
+
+
+## Reactive MongoDB Support
+
+![spring-data-ReactiveMongoRepository](/images/spring-data-ReactiveMongoRepository.png)
+
+org.springframework.data.mongodb.repository.support.SimpleReactiveMongoRepository

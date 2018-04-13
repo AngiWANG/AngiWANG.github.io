@@ -29,4 +29,6 @@ Spring Data Neo4j注解
 
 GraphDatabaseService
 
+![spring-data-Neo4jRepository](/images/spring-data-Neo4jRepository.png)
+
 org.springframework.data.neo4j.repository.support.SimpleNeo4jRepository<T, ID>

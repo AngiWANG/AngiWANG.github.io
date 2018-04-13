@@ -61,8 +61,11 @@ class ApplicationConfig {
 
 
 
-\#定义泛型参数化的继承Spring Data 
-JPA的某一个接口，自动生成实现（org.springframework.data.jpa.repository.support.SimpleJpaRepository<T,
+![spring-data-JpaRepository](/images/spring-data-JpaRepository.png)
+
+
+
+定义泛型参数化的继承Spring Data JPA的某一个接口，自动生成实现（org.springframework.data.jpa.repository.support.SimpleJpaRepository<T,
  ID>），拥有18个基本方法
 
 <SpringDataJpaRepository接口> extends JpaRepository<Model, Long>
@@ -77,7 +80,7 @@ JPA的某一个接口，自动生成实现（org.springframework.data.jpa.reposi
 
 主题：可省略，一般是由泛型参数化决定的，例外Distinct开头
 
-- 声明自定义查询
+- 声明式自定义查询
 
 自动实现
 
