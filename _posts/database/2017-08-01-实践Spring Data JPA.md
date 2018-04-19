@@ -8,7 +8,7 @@ tags: database spring-data spring-data-jpa
 
 [Spring Data JPA](http://projects.spring.io/spring-data-jpa), part of the larger [Spring Data](http://projects.spring.io/spring-data) family, makes it easy to easily implement JPA based repositories. This module deals with enhanced support for JPA based data access layers. It makes it easier to build Spring-powered applications that use data access technologies.
 
-相比较于原始JPA或Spring JPA，Spring Data JPA封装和扩展更进了一步，通过自动生成Repository代理实现和bean定义，减少了样板代码，提升了开发效率，同时又支持自定义，保持了灵活性。基于XML和JavaConfig方式参考如下：
+相比较于原始JPA或Spring JPA，Spring Data JPA封装和扩展更进了一步。基于XML和JavaConfig方式参考如下：
 
 ## JPA xml namespace
 
@@ -25,8 +25,6 @@ http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
   	<jpa:repositories base-package="com.acme.repositories"/>
 </beans>
 ```
-
-
 
 ## JPA JavaConfig
 
@@ -59,51 +57,13 @@ class ApplicationConfig {
 }
 ```
 
-
+## Jpa Repositories
 
 ![spring-data-JpaRepository](/images/spring-data-JpaRepository.png)
 
+定义泛型参数化的继承Spring Data JPA的某一个接口，自动生成实现（`org.springframework.data.jpa.repository.support.SimpleJpaRepository<T, ID>`），拥有18个基本方法
 
-
-定义泛型参数化的继承Spring Data JPA的某一个接口，自动生成实现（org.springframework.data.jpa.repository.support.SimpleJpaRepository<T,
- ID>），拥有18个基本方法
-
+```java
 <SpringDataJpaRepository接口> extends JpaRepository<Model, Long>
-
-- 自定义查询方法
-
-自动实现
-
-<查询动词><主题>by<断言>
-
-查询动词：get/read/find/count
-
-主题：可省略，一般是由泛型参数化决定的，例外Distinct开头
-
-- 声明式自定义查询
-
-自动实现
-
-@Query
-
-例如：
-
-```java
-// mongoDB
-@Query("{'customer':'Chuck Wagon','type':?0}")
-List<Order> findChucksOrders(String type);
-```
-
-- 混合自定义
-
-自定义接口，需要自己实现
-
-//默认：repositoryImplementationPostfix="Impl"
-
-<SpringDataJpaRepository接口>Impl
-
-```java
-@PersistenceContext
-private EntityManager em;
 ```
 

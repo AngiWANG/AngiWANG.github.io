@@ -21,6 +21,8 @@ tags: java visualvm
 
 ## 通过jstatd连接远程服务
 
+远程服务器进行如下操作：
+
 1. 配置安全访问
 
    在远程服务器新建文件`jstatd.all.policy`，内容如下：

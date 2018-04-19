@@ -250,6 +250,36 @@ Jedis
 
 ## Redis Repositories
 
+![spring-data-RedisRepository](/images/spring-data-RedisRepository.png)
+
+### Reactive Repositories
+
+![spring-data-ReactiveRedisRepository](/images/spring-data-ReactiveRedisRepository.png)
+
+## QA
+
+### spring boot project
+
+```java
+// 报错，没有注入
+@Autowired
+private ReactiveRedisTemplate<String, String> reactiveRedisTemplate;
+
+// OK
+@Autowired
+private ReactiveRedisTemplate<Object, Object> reactiveRedisTemplate;
+
+// OK
+@Autowired
+private RedisTemplate<String, String> redisTemplate;
+
+// OK
+@Autowired
+private RedisTemplate<Object, Object> redisTemplate;
+```
+
+
+
 ## 参考
 
 [Redis命令参考](http://redisdoc.com/)
