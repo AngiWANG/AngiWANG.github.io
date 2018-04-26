@@ -28,11 +28,11 @@ Java8新增的Stream是对Collections的一个增强，专注于对集合对象�
 
 #### map(Function)
 
-one to one
+one to another
 
 #### flatMap(Function)
 
-one to many
+one to Stream
 
 #### mapToInt(Function)
 

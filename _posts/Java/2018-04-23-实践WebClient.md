@@ -26,7 +26,7 @@ WebClient是Spring 5提供的一个非阻塞和响应式的HTTP客户端API
 
 ## webTestClient
 
-WebTestClient是Spring 5提供的一个用于测试web服务器的非阻塞和响应式的客户端，基于WebClient
+WebTestClient是Spring 5提供的一个用于测试web服务器的非阻塞和响应式的客户端，基于WebClient实现。
 
 ```java
 private final WebTestClient webTestClient = WebTestClient.bindToServer().baseUrl("http://localhost:8080").build();
@@ -44,5 +44,26 @@ private final WebTestClient webTestClient = WebTestClient.bindToServer().baseUrl
                 .expectStatus().isOk()
                 .expectBody().jsonPath("name").isEqualTo("Test");
     }
+```
+
+如果配合@SpringBootTest则会自动创建并注入，样例如下：
+
+```java
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+public class WebfluxDemoApplicationTests {
+
+    @Autowired
+    private WebTestClient webTestClient;
+
+    @Test
+    public void testHelloController1() {
+        webTestClient.get().uri("/hello")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(String.class).isEqualTo("Welcome to reactive world ~~");
+    }
+
+}
 ```
 

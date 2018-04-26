@@ -12,7 +12,7 @@ Spring 3提供的一个同步HTTP客户端，支持RESTful，默认使用JDK作�
 
 ## TestRestTemplate
 
-Spring Boot Test 1.4新增，用于支持集成测试，配合@SpringBootTest则会自动创建并注入。
+Spring Boot Test 1.4.0新增，用于支持集成测试，配合@SpringBootTest则会自动创建并注入。
 
 ```java
 @RestController

@@ -62,10 +62,14 @@ public class UserControllerStandaloneSetupTest {
     }  
 ```
 
-
-
 ## @Rollback
+
+如果希望执行完测试后，数据库等支持事务的资源还原，可以在单元测试上增加`@Transactional`，由于`@Rollback`默认值为true，因而会回滚，如果不希望回滚可以不添加`@Transactional`或者设置`@Rollback(false)`
 
 ## @Commit
 
+相当于`@Rollback(false)`
+
 ## @TransactionConfiguration
+
+不再推荐使用，推荐使用@Rollback和@Commit

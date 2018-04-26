@@ -10,7 +10,7 @@ tags: test spring-boot-test spring-boot
 
 ## @SpringBootTest
 
-针对`Spring Boot`应用的测试支持，当`webEnvironment`为`RANDOM_PORT`和`DEFINED_PORT`时，默认可以注入`TestRestTemplate`，当`webEnvironment`为`MOCK`时，则需要配合`MockMvc`
+针对`Spring Boot`应用的测试支持（1.4.0版本加入），当`webEnvironment`为`RANDOM_PORT`和`DEFINED_PORT`时，默认可以注入`TestRestTemplate`或`WebTestClient`，当`webEnvironment`为`MOCK`时，则需要`MockMvc`配合。
 
 ### value或properties
 
@@ -58,6 +58,8 @@ public class DemoApplicationTests
 
 ### 样例
 
+#### TestRestTemplate
+
 ```java
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {ReadingListApplication.class}, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -74,6 +76,28 @@ public class WebEnviromentNotMockTests {
     }
 }
 ```
+
+#### WebTestClient
+
+```java
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+public class WebfluxDemoApplicationTests {
+
+    @Autowired
+    private WebTestClient webTestClient;
+
+    @Test
+    public void testHelloController1() {
+        webTestClient.get().uri("/hello")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(String.class).isEqualTo("Welcome to reactive world ~~");
+    }
+}
+```
+
+
 
 ## @WebMvcTest
 
