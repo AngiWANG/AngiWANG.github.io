@@ -41,6 +41,12 @@ tags: java visualvm
 
 jstatd方式下，Sampler、MBeans、JConsole不能启用
 
+### OOL
+
+针对堆dump，可以利用OOL进行查询，例如：
+
+`select s from org.apache.activemq.ActiveMQSession s`
+
 ## QA
 
 ### 不受此JVM支持（Not supported for this JVM）

@@ -17,3 +17,7 @@ tags: document-database nosql mongodb database
 ![spring-data-ReactiveMongoRepository](/images/spring-data-ReactiveMongoRepository.png)
 
 org.springframework.data.mongodb.repository.support.SimpleReactiveMongoRepository
+
+
+
+@Tailable
