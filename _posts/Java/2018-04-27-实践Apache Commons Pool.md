@@ -21,8 +21,8 @@ tags: java pool commons-pool
 | maxWaitMillis      | -1(indefinitely) | The maximum number of milliseconds that the pool will wait (when there are no available connections) for a connection to be returned before throwing an exception, or -1 to wait indefinitely.【blockWhenExhausted为true才有效果】pool1的属性名是maxWait |
 | blockWhenExhausted | true             | Sets whether to block when the `borrowObject()` method is invoked when the pool is exhausted (the maximum number of "active" objects has been reached). |
 
-| Parameter                       | Default        | Description                              |
-| ------------------------------- | -------------- | ---------------------------------------- |
+| Parameter          | Default          | Description                              |
+| ------------------ | ---------------- | ---------------------------------------- |
 | testOnCreate                    | false          | The indication of whether objects will be validated after              creation. If the object fails to validate, the borrow attempt                    that triggered the object creation will fail. |
 | testOnBorrow                    | false          | The indication of whether objects will be validated before                being borrowed from the pool. If the object fails to validate, it                 will be dropped from the pool, and we will attempt to borrow        another. |
 | testOnReturn                    | false          | The indication of whether objects will be validated before                   being returned to the pool. |
@@ -78,7 +78,13 @@ public void setConfig(GenericObjectPoolConfig conf) {
  }
 ```
 
+## 运作机制
 
+初始化新建的对象（addObject() ）先进入idleObjects，returnObject()和ensureIdle()的对象也会先进入idleObjects
+
+所有创建的对象（create()）都进入allObjects，被销毁（destroy()）时才从allObjects移除
+
+借用先从idleObjects获取，获取不到则create()，如果创建失败，则等待从idleObjects获取
 
 ## 源码分析
 
