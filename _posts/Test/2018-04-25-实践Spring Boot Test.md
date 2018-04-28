@@ -136,7 +136,7 @@ public class WebMvcTests {
 
 ```java
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {ReadingListApplication.class}, webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+@SpringBootTest(classes = {ReadingListApplication.class})
 @AutoConfigureMockMvc
 public class AutoConfigureMockMvcTests {
 

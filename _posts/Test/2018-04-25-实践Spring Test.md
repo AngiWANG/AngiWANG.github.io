@@ -14,18 +14,22 @@ tags: test spring-test spring
 
 ## @WebAppConfiguration
 
-声明`Web上下文`，结合`@ContextConfiguration`实例化上下文
+声明`Web上下文`，结合`@ContextConfiguration`实例化应用上下文，会自动注入`WebApplicationContext`，利用`WebApplicationContext`可以创建`MockMvc`实例。
 
 ## @MockMvc
 
 ### MockMvcBuilders#standaloneSetup
 
 ```java
+@RunWith(SpringJUnit4ClassRunner.class) 
+@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
 public class UserControllerStandaloneSetupTest {  
+  	@Autowired
+  	private UserController userController;
+  
     private MockMvc mockMvc;  
     @Before  
-    public void setUp() {  
-        UserController userController = new UserController();  
+    public void setUp() {   
         mockMvc = MockMvcBuilders.standaloneSetup(userController).build();  
     }  
 } 
@@ -37,18 +41,7 @@ public class UserControllerStandaloneSetupTest {
     //XML风格  
     @RunWith(SpringJUnit4ClassRunner.class)  
     @WebAppConfiguration(value = "src/main/webapp")  
-    @ContextHierarchy({  
-            @ContextConfiguration(name = "parent", locations = "classpath:spring-config.xml"),  
-            @ContextConfiguration(name = "child", locations = "classpath:spring-mvc.xml")  
-    })  
-      
-    //注解风格  
-    //@RunWith(SpringJUnit4ClassRunner.class)  
-    //@WebAppConfiguration(value = "src/main/webapp")  
-    //@ContextHierarchy({  
-    //        @ContextConfiguration(name = "parent", classes = AppConfig.class),  
-    //        @ContextConfiguration(name = "child", classes = MvcConfig.class)  
-    //})  
+    @ContextConfiguration(locations = {"classpath:applicationContext.xml"})
     public class UserControllerWebAppContextSetupTest {  
       
         @Autowired  
