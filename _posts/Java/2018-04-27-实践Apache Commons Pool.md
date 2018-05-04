@@ -10,7 +10,7 @@ tags: java pool commons-pool
 
 版本2完全重写，性能和稳定性都得到了提升，还提供了跟踪和监控功能，需要JDK1.6或更高版本。
 
-基础参数
+
 
 | Parameter          | Default          | Description                              |
 | ------------------ | ---------------- | ---------------------------------------- |
@@ -20,7 +20,7 @@ tags: java pool commons-pool
 | minIdle            | 0                | The minimum number of connections that can remain idle in the pool, without extra ones being created, or zero to create none.**【空闲时保持住minIdle，以应对高峰的突然来临】【timeBetweenEvictionRunsMillis>0才有意义】** |
 | maxWaitMillis      | -1(indefinitely) |                                          |
 | blockWhenExhausted | true             | Sets whether to block when the `borrowObject()` method is invoked when the pool is exhausted (the maximum number of "active" objects has been reached). |
-检查参数
+
 | Parameter                       | Default        | Description                              |
 | ------------------------------- | -------------- | ---------------------------------------- |
 | testOnCreate                    | false          | The indication of whether objects will be validated after creation. If the object fails to validate, the borrow attempt that triggered the object creation will fail. |
@@ -32,7 +32,7 @@ tags: java pool commons-pool
 | minEvictableIdleTimeMillis      | 1000 * 60 * 30 | The minimum amount of time an object may sit **idle** in the pool before it is eligable for eviction by the idle object evictor (if any).**可以理解为timeout，idle对象不一定timeout，可能还没到时间【idleTime=System.currentTimeMillis() - lastReturnTime】** |
 | softMiniEvictableIdleTimeMillis | -1             | The minimum amount of time a connection may sit idle in the pool before it is eligible for eviction by the idle connection evictor, with the extra condition that at least "minIdle" connections remain in the pool. When miniEvictableIdleTimeMillis is set to a positive value, miniEvictableIdleTimeMillis is examined first by the idle connection evictor - i.e. when idle connections are visited by the evictor, idle time is first compared against miniEvictableIdleTimeMillis (without considering the number of idle connections in the pool) and then against softMinEvictableIdleTimeMillis, including the minIdle constraint.**可以理解为timeout，idle不一定timeout，可能还没到时间softMiniEvictableIdleTimeMillis+空闲数量是否大于minIdle**<br />if ((config.getIdleSoftEvictTime() < underTest.getIdleTimeMillis() &&         config.getMinIdle() < idleCount) \|\|         config.getIdleEvictTime() < underTest.getIdleTimeMillis()) {     return true; } |
 | lifo                            | true           | True means that borrowObject returns the most recently used ("last in") connection in the pool (if there are idle connections available). False means that the pool behaves as a FIFO queue - connections are taken from the idle instance pool in the order that they are returned to the pool.**池使用规则按后进先出，即优先使用后归还的evictor检测in oldest-to-youngest order** |
-维护参数
+
 | Parameter                                | Default                             | Description                              |
 | ---------------------------------------- | ----------------------------------- | ---------------------------------------- |
 | removeAbandonedOnMaintenance<br />removeAbandonedOnBorrow | false                               | Flags to remove abandoned connections if they exceed the removeAbandonedTimout. A connection is considered abandoned and eligible for removal if it has not been used for longer than removeAbandonedTimeout.**【长时间未被使用】**Creating a Statement, PreparedStatement or CallableStatement or using one of these to execute a query (using one of the execute methods) resets the lastUsed property of the parent connection.**【会更新最后使用时间，lastUseTime = lastBorrowTime】**Setting one or both of these to true can recover db connections from **poorly written applications which fail to close connections**.**【借了未还】**Setting removeAbandonedOnMaintenance to true removes abandoned connections on the maintenance cycle (when eviction ends). This property has no effect unless maintenance is enabled by setting timeBetweenEvicionRunsMillis to a positive value. If removeAbandonedOnBorrow is true, abandoned connections are removed each time a connection is borrowed from the pool, with the additional requirements thatgetNumActive() > getMaxTotal() - 3; andgetNumIdle() < 2【timeBetweenEvictionRunsMillis>0才有意义】 |
@@ -40,7 +40,7 @@ tags: java pool commons-pool
 | logAbandoned                             | false                               | Flag to log stack traces for application code which abandoned a Statement or Connection. Logging of abandoned Statements and Connections adds overhead for every Connection open or new Statement because a stack trace has to be generated. |
 | abandonedUsageTracking                   | false                               | If true, the connection pool records a stack trace every time a method is called on a pooled connection and retains the most recent stack trace to aid debugging of abandoned connections. There is significant overhead added by setting this to true. |
 | logWriter                                | **new** PrintWriter(System.**out**) | Sets the log writer to be used by this configuration to log information on abandoned objects. |
-其他参数
+
 | Parameter                  | Default               | Description                              |
 | -------------------------- | --------------------- | ---------------------------------------- |
 | swallowedExceptionListener | null                  | The listener used (if any) to receive notifications of exceptions unavoidably swallowed by the pool. |
