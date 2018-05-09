@@ -1,91 +1,102 @@
 ---
 layout: post
-title: "实践AsyncServlet"
+title: "实践Async Spring MVC"
 date: 2018-05-09 11:08:00 +0800
 categories: Java
-tags: java AsyncServlet Servlet
+tags: java Spring-MVC Async
 ---
 
 
 
 ## 样例
 
+web.xml
+
+```xml
+<?xml version="1.0" encoding="ASCII"?>
+<web-app version="3.1" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee.http://java.sun.com/xml/ns/javaee/web-app_3_1.xsd">
+<servlet>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/mvc-config.xml</param-value>
+        </init-param>
+        <async-supported>true</async-supported>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+</web-app>
+```
+
+
+
+
+
 ```java
-@WebServlet(name = "asyncServlet", urlPatterns = "/asyncServlet", asyncSupported = true)
-public class AsyncServlet extends HttpServlet {
+@Controller
+public class HelloWorldController {
 
-	Logger logger = LoggerFactory.getLogger(AsyncServlet.class);
+    Logger logger = LoggerFactory.getLogger(HelloWorldController.class);
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		logger.info("doGet begin");
-
-		try {
+    @RequestMapping("/helloWorld")
+    @ResponseBody
+    public DeferredResult<String> helloWorld() {
+        logger.info("helloWorld begin");
+      
+      	try {
 			TimeUnit.SECONDS.sleep(3);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+      
+        final DeferredResult<String> deferredResult = new DeferredResult<String>(30 * 1000);
+        // 另开worker线程进行回调处理
+        deferredResult.onCompletion(new Runnable() {
+            public void run() {
+                logger.info("onCompletion begin");
+                try {
+                    Thread.sleep(10 * 1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                logger.info("onCompletion end");
+            }
 
-		final AsyncContext asyncContext = req.startAsync();
-		asyncContext.setTimeout(30 * 1000);
-		asyncContext.addListener(new AsyncListener() {
-			public void onComplete(AsyncEvent event) throws IOException {
-				logger.info("onComplete begin");
-				try {
-					TimeUnit.SECONDS.sleep(3);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				logger.info("onComplete end");
-			}
+        });
+        // 自定义线程进行业务处理
+        new Thread(new Runnable() {
+            public void run() {
+                logger.info("biz begin");
+                try {
+                    Thread.sleep(10 * 1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                deferredResult.setResult("Hello, World!");
+                logger.info("biz end");
+            }
 
-			public void onTimeout(AsyncEvent event) throws IOException {
-				logger.info("onTimeout");
-			}
-
-			public void onError(AsyncEvent event) throws IOException {
-				logger.info("onError");
-			}
-
-			public void onStartAsync(AsyncEvent event) throws IOException {
-				logger.info("onStartAsync");
-			}
-		});
-		asyncContext.start(new Runnable() {
-			public void run() {
-				logger.info("biz begin");
-				PrintWriter printWriter = null;
-				try {
-					TimeUnit.SECONDS.sleep(20);
-					printWriter = asyncContext.getResponse().getWriter();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				printWriter.println("Hello, AsyncServlet.");
-				printWriter.flush();
-				printWriter.close();
-				asyncContext.complete();
-				logger.info("biz end");
-			}
-		});
-		logger.info("doGet end");
-	}
+        }).start();
+        logger.info("helloWorld end");
+        return deferredResult;
+    }
 }
 ```
 
 收到一笔请求时日志输出：
 
 ```
-2018-05-09 09:12:06.867 INFO [http-bio-8080-exec-1] servlet.AsyncServlet:31 >> doGet begin
-2018-05-09 09:12:09.877 INFO [http-bio-8080-exec-1] servlet.AsyncServlet:81 >> doGet end
-2018-05-09 09:12:09.877 INFO [http-bio-8080-exec-2] servlet.AsyncServlet$2:66 >> biz begin
-2018-05-09 09:12:29.887 INFO [http-bio-8080-exec-2] servlet.AsyncServlet$2:78 >> biz end
-2018-05-09 09:12:29.888 INFO [http-bio-8080-exec-3] servlet.AsyncServlet$1:43 >> onComplete begin
-2018-05-09 09:12:32.889 INFO [http-bio-8080-exec-3] servlet.AsyncServlet$1:49 >> onComplete end
+2018-05-09 12:03:06.947 INFO [http-bio-8080-exec-1] com.allinpay.sample.spring.mvc.web.HelloWorldController:21 >> helloWorld begin
+2018-05-09 12:03:06.949 INFO [http-bio-8080-exec-1] com.allinpay.sample.spring.mvc.web.HelloWorldController:50 >> helloWorld end
+2018-05-09 12:03:06.949 INFO [Thread-4] com.allinpay.sample.spring.mvc.web.HelloWorldController$2:39 >> biz begin
+2018-05-09 12:03:16.951 INFO [Thread-4] com.allinpay.sample.spring.mvc.web.HelloWorldController$2:46 >> biz end
+2018-05-09 12:03:16.972 INFO [http-bio-8080-exec-2] com.allinpay.sample.spring.mvc.web.HelloWorldController$1:26 >> onCompletion begin
+2018-05-09 12:03:26.973 INFO [http-bio-8080-exec-2] com.allinpay.sample.spring.mvc.web.HelloWorldController$1:32 >> onCompletion end
 ```
 
 （设定worker线程池大小为3的情况下）连续收到两笔请求时线程栈如下：
 
 [AsyncServlet](/images/AsyncServlet.png)
 
-可见worker线程在AysncServlet下不是独享至Servlet结束，而是高效共享的，包括Servlet和业务
+可见worker线程在AysncServlet下不是一直占用至Servlet结束，这样一个worker线程可以服务于多个请求

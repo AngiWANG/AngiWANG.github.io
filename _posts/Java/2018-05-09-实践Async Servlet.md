@@ -28,6 +28,7 @@ public class AsyncServlet extends HttpServlet {
 
 		final AsyncContext asyncContext = req.startAsync();
 		asyncContext.setTimeout(30 * 1000);
+      	// 另开worker线程进行回调处理
 		asyncContext.addListener(new AsyncListener() {
 			public void onComplete(AsyncEvent event) throws IOException {
 				logger.info("onComplete begin");
@@ -51,6 +52,7 @@ public class AsyncServlet extends HttpServlet {
 				logger.info("onStartAsync");
 			}
 		});
+      	// 另开worker线程进行业务处理
 		asyncContext.start(new Runnable() {
 			public void run() {
 				logger.info("biz begin");
@@ -88,4 +90,4 @@ public class AsyncServlet extends HttpServlet {
 
 [AsyncServlet](/images/AsyncServlet.png)
 
-可见worker线程在AysncServlet下不是独享至Servlet结束，而是高效共享的，包括Servlet和业务
+可见worker线程在AysncServlet下不是一直占用至Servlet结束，这样一个worker线程可以服务于多个请求。
