@@ -87,12 +87,12 @@ public class HelloWorldController {
 收到一笔请求时日志输出：
 
 ```
-2018-05-09 12:03:06.947 INFO [http-bio-8080-exec-1] com.allinpay.sample.spring.mvc.web.HelloWorldController:21 >> helloWorld begin
-2018-05-09 12:03:06.949 INFO [http-bio-8080-exec-1] com.allinpay.sample.spring.mvc.web.HelloWorldController:50 >> helloWorld end
-2018-05-09 12:03:06.949 INFO [Thread-4] com.allinpay.sample.spring.mvc.web.HelloWorldController$2:39 >> biz begin
-2018-05-09 12:03:16.951 INFO [Thread-4] com.allinpay.sample.spring.mvc.web.HelloWorldController$2:46 >> biz end
-2018-05-09 12:03:16.972 INFO [http-bio-8080-exec-2] com.allinpay.sample.spring.mvc.web.HelloWorldController$1:26 >> onCompletion begin
-2018-05-09 12:03:26.973 INFO [http-bio-8080-exec-2] com.allinpay.sample.spring.mvc.web.HelloWorldController$1:32 >> onCompletion end
+2018-05-09 12:03:06.947 INFO [http-bio-8080-exec-1] HelloWorldController:21 >> helloWorld begin
+2018-05-09 12:03:06.949 INFO [http-bio-8080-exec-1] HelloWorldController:50 >> helloWorld end
+2018-05-09 12:03:06.949 INFO [Thread-4] HelloWorldController$2:39 >> biz begin
+2018-05-09 12:03:16.951 INFO [Thread-4] HelloWorldController$2:46 >> biz end
+2018-05-09 12:03:16.972 INFO [http-bio-8080-exec-2] HelloWorldController$1:26 >> onCompletion begin
+2018-05-09 12:03:26.973 INFO [http-bio-8080-exec-2] HelloWorldController$1:32 >> onCompletion end
 ```
 
 （设定worker线程池大小为3的情况下）连续收到两笔请求时线程栈如下：
