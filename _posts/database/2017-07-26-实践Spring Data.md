@@ -37,7 +37,7 @@ Spring Data预定义的Repository接口如下：
 
 不同的持久化方案有不同的扩展，比如：JPA、Redis、MongoDB、Neo4j、Gemfire、LDAP、Cassandra、Solr等。
 
-对于继承`Repository`或其`子接口`的`Repository接口`，Spring Data会扫描且自动生成`Repository代理实现`和`bean定义`，减少了样板代码，提升了开发效率，同时又支持自定义，保持了灵活性。如果希望`Repository接口`不被自动实例化，仅作为模板接口，
+对于继承`Repository`或其`子接口`的`接口`，称为`Repository接口`，Spring Data会扫描且自动生成`Repository代理实现`和`bean定义`，减少了样板代码，提升了开发效率，同时又支持自定义，保持了灵活性。如果希望`Repository接口`不被自动实例化，仅作为模板接口，可以在其上使用`@NoRepositoryBean`。
 
 ### 扩展Repository
 
@@ -45,9 +45,9 @@ Spring Data预定义的Repository接口如下：
 
 自动实现
 
-<查询动词><主题>by<断言>
+`<查询动词><主题>by<断言>`
 
-查询动词：get/read/find/count
+查询动词：get/read/find/count/delete/remove
 
 主题：可省略，一般是由泛型参数化决定的，例外Distinct开头
 
@@ -69,14 +69,15 @@ List<Order> findChucksOrders(String type);
 
 自定义接口，需要自己实现
 
-// 实现类后缀配置
+实现类后缀配置，默认值是`Impl`
 
 `repositoryImplementationPostfix="Impl"`
 
-<SpringDataJpaRepository接口>Impl
+`<SpringDataJpaRepository接口>Impl`
 
 ```java
 @PersistenceContext
 private EntityManager em;
 ```
 
+## Pageable and Sort

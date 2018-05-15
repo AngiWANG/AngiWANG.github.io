@@ -88,6 +88,6 @@ public class AsyncServlet extends HttpServlet {
 
 （设定worker线程池大小为3的情况下）连续收到两笔请求时线程栈如下：
 
-[AsyncServlet](/images/AsyncServlet.png)
+![AsyncServlet](/images/AsyncServlet.png)
 
 可见worker线程在AysncServlet下不是一直占用至Servlet结束，这样一个worker线程可以服务于多个请求。

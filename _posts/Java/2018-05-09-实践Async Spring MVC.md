@@ -97,6 +97,43 @@ public class HelloWorldController {
 
 （设定worker线程池大小为3的情况下）连续收到两笔请求时线程栈如下：
 
-[AsyncServlet](/images/AsyncServlet.png)
+![AsyncServlet](/images/AsyncServlet.png)
 
-可见worker线程在AysncServlet下不是一直占用至Servlet结束，这样一个worker线程可以服务于多个请求
+可见worker线程在AysncServlet下不是一直占用至Servlet结束，这样一个worker线程可以服务于多个请求。
+
+## DeferredResult
+
+
+
+```java
+public DeferredResult(Long timeout, Object timeoutResult) {
+	this.timeoutResult = timeoutResult;
+	this.timeout = timeout;
+}
+```
+
+默认`timeoutResult`是`new Object()`
+
+## setResult(T result)
+
+默认`result`是`new Object()`
+
+## setErrorResult(Object result)
+
+## onComplete
+
+## onTimeout
+
+当没有注册`onTimeout`时，默认超时后会应答500
+
+```
+HTTP Status 500 -
+
+type Status report
+
+message
+
+description The server encountered an internal error that prevented it from fulfilling this request.
+Apache Tomcat/7.0.78
+```
+
