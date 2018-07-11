@@ -42,6 +42,10 @@ Line spacing: 1.2
 |                |                 |
 | ctrl+shift+F10 | run             |
 
+## vim
+
+![IdeaVim Hotkey](/images/IdeaVim-Hotkey.jpg)
+
 ###  Edition Comparison
 
 [Community VS Ultimate](http://www.jetbrains.com/idea/features/editions_comparison_matrix.html)
