@@ -6,4 +6,4 @@ categories: 数据库
 tags: database sharding-sidecar
 ---
 
-Sharding-Sidecar定位为Kubernetes或Mesos的云原生数据库代理。
+[Sharding-Sidecar](http://shardingjdbc.io/)定位为Kubernetes或Mesos的云原生数据库代理。
