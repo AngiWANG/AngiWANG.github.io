@@ -133,7 +133,7 @@ private String name;
 4. 注入其他Bean的属性（@Value("#{demoService.username}")）
 5. 注入文件内容（@Value("classpath:text.txt")）
 6. 注入网址内容（@Value("http://www.baidu.com")）
-7. 注入属性（@Value("${book.name}")）
+7. 注入属性（@Value("${book.name}")），带默认值（@Value("${book.name:abc}")）
 
 ### @ConfigurationProperties
 
