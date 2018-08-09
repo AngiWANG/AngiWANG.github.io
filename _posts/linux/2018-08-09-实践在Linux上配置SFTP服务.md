@@ -35,14 +35,12 @@ $ chown testuser:sftpusers /home/testuser/uploads
 
 ```shell
 $ mkdir /home/testuser/downloads
-
+# 修改目录属主为其他非sftpuser组的指定用户
+$ chown ctsapp:sftpusers /home/testuser/downloads
+# 或者修改权限支持其他用户读写，风险较大
 $ chown testuser:sftpusers /home/testuser/downloads
 $ chown 557 -R /home/testuser/downloads
-# 或者直接修改目录属主为其他非sftpuser用户
-$ chown ctsapp:sftpusers /home/testuser/downloads
 ```
-
-
 
 备注：其实新建的目录是否能够上传是看Linux的目录权限配置。
 
