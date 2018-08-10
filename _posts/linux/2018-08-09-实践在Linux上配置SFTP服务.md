@@ -8,14 +8,14 @@ tags: linux sftp
 
 ## 配置sftp服务
 
-以下操作都在root用户下执行
+以下操作都需要root权限
 
 ```shell
 # 添加组
 $ groupadd sftpusers
 # 添加sftp用户，不允许ssh登录
 $ useradd -g sftpusers -s /sbin/nologin testuser
-# 用户根目录属主必须是root
+# 用户主目录属主必须是root
 $ chown root:sftpusers /home/testuser
 # 权限可以是755或者750
 $ chmod 755 -R /home/testuser
@@ -24,19 +24,19 @@ $ passwd testuser
 
 由于用户根目录不允许上传，只能下载
 
-新建testuser可以上传的目录（755），其他用户默认不能上传
+新建testuser读写目录，其他用户默认只读
 
 ```shell
 $ mkdir /home/testuser/uploads
 $ chown testuser:sftpusers /home/testuser/uploads
 ```
 
-新建testuser不能上传，但是非sftpuser用户可以上传的目录
+新建testuser只读，但是非sftpuser用户读写的目录
 
 ```shell
 $ mkdir /home/testuser/downloads
-# 修改目录属主为其他非sftpuser组的指定用户
-$ chown ctsapp:sftpusers /home/testuser/downloads
+# 修改目录属主为其他非sftpuser组的指定用户，比如app用户
+$ chown app:sftpusers /home/testuser/downloads
 # 或者修改权限支持其他用户读写，风险较大
 $ chown testuser:sftpusers /home/testuser/downloads
 $ chown 557 -R /home/testuser/downloads
