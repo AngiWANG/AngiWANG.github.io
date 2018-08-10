@@ -13,36 +13,7 @@ tags: linux sftp
 ```shell
 # 添加组
 $ groupadd sftpusers
-# 添加sftp用户，不允许ssh登录
-$ useradd -g sftpusers -s /sbin/nologin testuser
-# 用户主目录属主必须是root
-$ chown root:sftpusers /home/testuser
-# 权限可以是755或者750
-$ chmod 755 -R /home/testuser
-$ passwd testuser
 ```
-
-由于用户根目录不允许上传，只能下载
-
-新建testuser读写目录，其他用户默认只读
-
-```shell
-$ mkdir /home/testuser/uploads
-$ chown testuser:sftpusers /home/testuser/uploads
-```
-
-新建testuser只读，但是非sftpuser用户读写的目录
-
-```shell
-$ mkdir /home/testuser/downloads
-# 修改目录属主为其他非sftpuser组的指定用户，比如app用户
-$ chown app:sftpusers /home/testuser/downloads
-# 或者修改权限支持其他用户读写，风险较大
-$ chown testuser:sftpusers /home/testuser/downloads
-$ chown 557 -R /home/testuser/downloads
-```
-
-备注：其实新建的目录是否能够上传是看Linux的目录权限配置。
 
 编辑`/etc/ssh/sshd_config`
 
@@ -69,7 +40,45 @@ X11Forwarding no # 设置不允许SSH的X转发
 $ service sshd restart
 ```
 
-### 测试
+## 添加用户
+
+*已添加testuser用户为例*
+
+```shell
+# 添加sftp用户，不允许ssh登录
+$ useradd -g sftpusers -s /sbin/nologin testuser
+# 用户主目录属主必须是root
+$ chown root:sftpusers /home/testuser
+# 权限可以是755或者750
+$ chmod 755 -R /home/testuser
+$ passwd testuser
+```
+
+### 新建目录
+
+由于用户主目录只读（属主是root，权限是755或750），如果需要写权限，变相的通过新建子目录实现。
+
+新建testuser读写目录，其他用户默认只读（755）
+
+```shell
+$ mkdir /home/testuser/uploads
+$ chown testuser:sftpusers /home/testuser/uploads
+```
+
+新建testuser只读，但是非sftpuser用户读写的目录
+
+```shell
+$ mkdir /home/testuser/downloads
+# 修改目录属主为其他非sftpuser组的指定用户，比如app用户
+$ chown app:sftpusers /home/testuser/downloads
+# 或者修改权限支持其他用户读写，风险较大
+$ chown testuser:sftpusers /home/testuser/downloads
+$ chown 557 -R /home/testuser/downloads
+```
+
+备注：其实新建的目录是否能够上传是看Linux的目录权限配置。
+
+## 测试
 
 ```shell
 $ sftp testuser@192.168.70.139
