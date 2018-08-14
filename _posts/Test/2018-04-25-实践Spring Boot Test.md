@@ -6,8 +6,6 @@ categories: 测试
 tags: test spring-boot-test spring-boot
 ---
 
-
-
 ## @SpringBootTest
 
 针对`Spring Boot`应用的测试支持（1.4.0版本加入），当`webEnvironment`为`RANDOM_PORT`和`DEFINED_PORT`时，默认可以注入`TestRestTemplate`或`WebTestClient`，当`webEnvironment`为`MOCK`时，则需要`MockMvc`配合。

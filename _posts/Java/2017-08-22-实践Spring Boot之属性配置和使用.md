@@ -37,6 +37,7 @@ $ java -Dname="isea533" -Dgender=1 -jar app.jar
 ```shell
 export SERVER_PORT=8765
 export SPRING_CLOUD_CONFIG_PROFILE=dev
+export SPRING_PROFILES_ACTIVE=dev
 ```
 
 ```shell
@@ -59,9 +60,18 @@ my.number.in.range=${random.int[1024,65536]}
 
 `random.int*`支持`value`参数和`max`参数，当提供`max`参数的时候，`value`就是最小值。
 
-### 应用程序外基于Profile的配置文件
+### 关于配置文件
 
-**备注：同名属性文件只会读取一个，比如读取了外部的application.properties就不会在读取应用程序内的application.properties**
+```properties
+# 默认值
+spring.config.name = application
+# 默认值，优先级从低到高
+spring.config.location = classpath:/,classpath:/config/,file:./,file:./config/
+```
+
+**备注：同名属性文件只会读取一个，比如读取了外部的application-dev.properties就不会再读取应用程序内的application-dev.properties；无Profile作为默认配置会被先读取，但是会被有Profile的覆盖已配置。**
+
+### 应用程序外基于Profile的配置文件
 
 config目录或应用根目录下`application-{profile}.properties`或者`appliaction-{profile}.yml`文件或者`application.yml`(带`spring.profiles`)
 
@@ -89,7 +99,7 @@ logging:
 
 ### 应用程序内基于Profile的配置文件
 
-config包或classpath根目录下`application-{profile}.properties`或者`appliaction-{profile}.yml`文件或者`application.yml`(带`spring.profiles`)
+classpath中config包或classpath根目录下`application-{profile}.properties`或者`appliaction-{profile}.yml`文件或者`application.yml`(带`spring.profiles`)
 
 ### 应用程序外的配置文件（默认）
 
@@ -99,7 +109,7 @@ config目录或应用根目录下`application.properties`或者`appliaction.yml`
 
 ### 应用程序内的配置文件（默认）
 
-config包或classpath根目录下`application.properties`或者`appliaction.yml`文件(不带`spring.profiles`)
+classpath中config包或classpath根目录下`application.properties`或者`appliaction.yml`文件(不带`spring.profiles`)
 
 ### 通过 @PropertySource 引入的配置文件
 

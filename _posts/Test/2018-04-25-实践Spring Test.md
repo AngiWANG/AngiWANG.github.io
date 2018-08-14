@@ -6,6 +6,44 @@ categories: 测试
 tags: test spring-test spring
 ---
 
+## spring-test
+
+```xml
+	    <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+          	 <version>4.1.2.RELEASE</version>
+			<scope>test</scope>
+		</dependency>
+```
+
+
+
+```java
+@RunWith(SpringJUnit4ClassRunner.class)
+//bean容器配置
+@ContextConfiguration(classes = { App1Config.class })
+//@ContextConfiguration(locations = {"app-context.xml"})
+public class SampleTest {
+
+	@Autowired
+	@Qualifier("videoService1")
+	private VideoService videoService11;
+
+	@Autowired
+	@Qualifier("videoService2")
+	private VideoService videoService22;
+
+	@Test
+	public void testAbc1() {
+		videoService11.sayHello("Angi");
+		videoService22.sayHello("Wang");
+		Assert.assertNotEquals(videoService11, videoService22);
+	}
+
+}
+```
+
 
 
 ## @ContextConfiguration
