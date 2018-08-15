@@ -85,3 +85,26 @@ logging:
     root: WARN
 ```
 
+## 应用于Logback
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+    <logger name="org.springframework.web" level="INFO"/>
+
+    <springProfile name="default">
+        <logger name="org.springboot.sample" level="TRACE" />
+    </springProfile>
+
+    <springProfile name="dev">
+        <logger name="org.springboot.sample" level="DEBUG" />
+    </springProfile>
+
+    <springProfile name="staging">
+        <logger name="org.springboot.sample" level="INFO" />
+    </springProfile>
+
+</configuration>
+```
+
