@@ -6,4 +6,4 @@ categories: 数据库
 tags: database cache twemproxy
 ---
 
-[Sharding-Sphere](http://shardingjdbc.io/)是一个开源的分布式数据库中间件套件，包含[Sharding-JDBC](/2018/07/11/实践数据库中间件之Sharding-JDBC.html)、[Sharding-Proxy](/2018/07/11/实践数据库中间件之Sharding-Proxy.html)和[Sharding-Sidecar](/2018/07/11/实践数据库中间件之Sharding-Sidecar.html)。
+[twemproxy](https://github.com/twitter/twemproxy) (pronounced "two-em-proxy"), aka **nutcracker** is a fast and lightweight proxy for [memcached](http://www.memcached.org/) and [redis](http://redis.io/) protocol. It was built primarily to reduce the number of connections to the caching servers on the backend. This, together with protocol pipelining and sharding enables you to horizontally scale your distributed caching architecture.
