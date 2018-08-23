@@ -103,4 +103,14 @@ public class UserControllerStandaloneSetupTest {
 
 ## @TransactionConfiguration
 
-不再推荐使用，推荐使用@Rollback和@Commit
+不再推荐使用，推荐使用`@Rollback`和`@Commit`
+
+## @DirtiesContext
+
+@since 2.0
+
+说明Context被“污染”，会被清除和关闭，重新生成新的。
+
+## @Sql
+
+@since 4.1
