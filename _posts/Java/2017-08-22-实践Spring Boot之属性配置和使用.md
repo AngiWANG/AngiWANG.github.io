@@ -133,6 +133,10 @@ application.run(args);
 ```java
 @Value("${book.name}")
 private String name;
+
+// 当指定属性不存在时启动会报错，可以设置默认值避免这个问题
+@Value("${book.price:99}")
+private Integer price;
 ```
 
 @Value除了支持属性注入外，还支持如下参数注入：
