@@ -8,6 +8,8 @@ tags: spring spring-boot java
 
 [Spring Boot](http://projects.spring.io/spring-boot/)用于快速高效地创建可执行的Spring应用程序，进一步升华了约定优于配置。
 
+## 快速开始
+
 1. 继承`spring-boot-starter-parent`
 
 ```xml
@@ -21,6 +23,8 @@ tags: spring spring-boot java
 `spring-boot-starter-parent`主要定义`pluginManagement`、编码和Java版本，同时继承`spring-boot-dependencies`，`spring-boot-dependencies`主要定义`dependencyManagement`、`pluginManagement`和`plugins`。
 
 2. 添加依赖
+
+   例如：spring-boot-starter-web
 
 ```xml
 <dependencies>
@@ -52,7 +56,7 @@ public class ReadingListApplication {
 
 * 直接运行Main类
 
-### Fat Jar或Executable Jar
+## Fat Jar或Executable Jar
 
 如果想打包为可执行的jar（即依赖也打包到jar中），则可以通过`spring-boot-maven-plugin`实现，添加插件
 

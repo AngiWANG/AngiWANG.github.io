@@ -6,9 +6,9 @@ categories: Java
 tags: spring spring-boot java spring-cloud
 ---
 
-[Spring Cloud](http://projects.spring.io/spring-cloud/)构建在Spring Boot之上，提供了服务治理相关的依赖管理。[Spring Cloud Reference Manual](https://cloud.spring.io/spring-cloud-static/current/)
+[Spring Cloud](http://projects.spring.io/spring-cloud/)构建在Spring Boot之上，提供了微服务体系和架构等相关的管理，例如：服务治理、配置管理等。[Spring Cloud Reference Manual](https://cloud.spring.io/spring-cloud-static/current/)
 
-### 依赖
+## 依赖
 
 ```xml
 <properties>
@@ -46,9 +46,6 @@ Spring Cloud Consul).
 ## @SpringCloudApplication
 
 ```java
-/**
- * @author Spencer Gibb
- */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
