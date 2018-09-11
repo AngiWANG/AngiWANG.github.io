@@ -17,6 +17,7 @@ Size: 18
 Line spacing: 1.2
 
 
+[IntelliJ IDEA 注册码](http://idea.lanyus.com/)
 
 ### 快捷键
 
