@@ -106,13 +106,9 @@ security:
     password: admin123
 ```
 
-浏览器访问eureka console需要输入账号。
+浏览器访问eureka console需要登录。
 
-eureka客户端：
 
-```properties
-eureka.client.service-url.defaultZone=http://admin:admin123@192.168.70.139:8888/eureka/
-```
 
 
 
@@ -137,8 +133,14 @@ com.netflix.discovery.endpoint.EndpointUtils.getServiceUrlsMapFromConfig(EurekaC
 
 org.springframework.cloud.netflix.eureka.EurekaClientConfigBean，此类实现了com.netflix.discovery.EurekaClientConfig接口，所有的配置属性以eureka.client开头
 
+eureka客户端：
+
 ```properties
-# 定义Eureka server地址，zone-》eureka server list，默认已经定义了defaultZone-》http://localhost:8761/eureka/
+eureka.client.service-url.defaultZone=http://admin:admin123@192.168.70.139:8888/eureka/
+```
+
+```properties
+# 配置Eureka server地址，zone-》eureka server list，默认已经定义了defaultZone-》http://localhost:8761/eureka/
 eureka.client.service-url.defaultZone=http://192.168.70.139:8888/eureka/
 eureka.client.service-url.zone1=http://192.168.70.139:8888/eureka/,http://192.168.70.139:8888/eureka/
 # 定义实例可用区域和所在区域（第一个），region-》zone list，如果region没有定义zone list，则取默认的defaultZone，会以所在区域去找eureka server
@@ -213,6 +215,8 @@ eureka.instance.hostname=peer1
 eureka.instance.prefer-ip-address=true
 # 自定义元数据
 eureka.instance.metadata-map.zone=zone1
+# 如果应用定义了context-path，则需要配置
+eureka.instance.metadata-map.configPath=${server.servlet.context-path:}
 # eureka.instace.instance-id，eureka list status显示名称
 eureka.instance.instance-id=${spring.cloud.client.ipAddress}:${spring.application.name}:${server.port}
 ```
