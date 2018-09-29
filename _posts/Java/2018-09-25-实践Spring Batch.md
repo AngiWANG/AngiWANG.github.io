@@ -20,3 +20,6 @@ Spring Batch provides reusable functions that are essential in processing large 
 
 ## Spring Batch Admin
 已经被Spring Cloud Data Flow替代
+
+## database
+数据库相关脚本在`spring-batch-core-4.0.1.RELEASE.jar/org/springframework/batch/core/`目录下，比如：`schema-mysql.sql`和`schema-drop-mysql.sql`
