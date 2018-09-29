@@ -27,3 +27,11 @@ The Spring Could Data Flow server exposes a `REST API` for composing and deployi
 
 ## database
 数据库相关脚本在`spring-cloud-dataflow-server-core-1.6.3.RELEASE.jar/schemas/`目录下，比如：`batch_task_indexes.sql`、`common.sql`、`deployment.sql`、`jpa.sql`、`streams.sql`和`tasks.sql`。
+共计7张表。
+DEPLOYMENT_IDS
+APP_REGISTRATION
+hibernate_sequence
+STREAM_DEFINITIONS
+STREAM_DEPLOYMENTS
+TASK_DEFINITIONS
+URI_REGISTRY
