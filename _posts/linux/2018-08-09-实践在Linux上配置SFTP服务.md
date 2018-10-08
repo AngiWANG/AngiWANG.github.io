@@ -11,7 +11,7 @@ tags: linux sftp
 以下操作都需要root权限
 
 ```shell
-# 添加组
+# 添加sftp用户组（例如：sftpusers）
 $ groupadd sftpusers
 ```
 
@@ -65,7 +65,7 @@ $ mkdir /home/testuser/uploads
 $ chown testuser:sftpusers /home/testuser/uploads
 ```
 
-新建testuser只读，但是非sftpuser用户读写的目录
+新建testuser只读，但是非sftpusers用户读写的目录
 
 ```shell
 $ mkdir /home/testuser/downloads
