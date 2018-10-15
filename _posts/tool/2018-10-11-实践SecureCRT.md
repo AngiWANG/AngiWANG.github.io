@@ -6,6 +6,8 @@ categories: 工具
 tags: SecureCRT tool
 ---
 
+## 安装
+
 deepin15.7下安装
 
 ```shell
@@ -33,6 +35,12 @@ License:
 
 运行SecureCRT，会提示注册，选择“Enter License Manually”，然后输入上述信息即可。
 
-
-
 参考[Linux MacOSX SecureCRT 完全破解](https://www.boll.me/archives/680#comment-2421)
+
+## 超时
+
+可以通过两个入口进行设置： 
+1、右击Session中的连接，选择Properties->Terminal->Anti-idle->勾选Send protocol NO-OP。 
+2、当已经建立连接的情况，可以通过上面方法，另外也可以通过点击Options->Session Options->Terminal->Anti-idle->勾选Send protocol NO-OP
+
+选中之后，后面显示60秒是默认值，可对其进行增减，只要这个时间段小于自动断开连接的时间就可以了。
