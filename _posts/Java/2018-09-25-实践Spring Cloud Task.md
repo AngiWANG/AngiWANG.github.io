@@ -42,6 +42,20 @@ public class SampleTask {
 }
 ```
 
+## database
+
+数据库相关脚本在`spring-cloud-task-core-2.0.0.RELEASE.jar/org/springframework/cloud/task/`目录下，比如：`schema-mysql.sql`，包括`5`张表：
+
+TASK_EXECUTION
+
+TASK_EXECUTION_PARAMS
+
+TASK_TASK_BATCH
+
+TASK_SEQ
+
+TASK_LOCK
+
 ## 与Spring Batch整合
 
 ## 与Spring Cloud Stream整合
