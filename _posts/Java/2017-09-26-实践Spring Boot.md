@@ -50,9 +50,7 @@ public class ReadingListApplication {
 
 4. 运行
 
-* ```shell
-  $ mvn spring-boot:run
-  ```
+* `$ mvn spring-boot:run`
 
 * 直接运行Main类
 
@@ -78,3 +76,6 @@ $ mvn clean package
 $ java -jar target/spring-boot-sample-0.0.1-SNAPSHOT.jar
 ```
 
+## @SpringBootApplication
+
+有`@SpringBootConfiguration`（`@Configuration`）、`@EnableAutoConfiguration`和`@ComponentScan`组成。

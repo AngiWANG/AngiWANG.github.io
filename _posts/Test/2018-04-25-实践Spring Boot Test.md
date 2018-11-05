@@ -8,7 +8,7 @@ tags: test spring-boot-test spring-boot
 
 ## @SpringBootTest
 
-针对`Spring Boot`应用的测试支持（1.4.0版本加入），当`webEnvironment`为`RANDOM_PORT`和`DEFINED_PORT`时，默认可以注入`TestRestTemplate`或`WebTestClient`，当`webEnvironment`为`MOCK`时，则需要`MockMvc`配合。
+针对`Spring Boot`应用的测试支持（1.4.0版本加入），当`webEnvironment`为`MOCK`时，默认可以注入`MockMvc`，当`webEnvironment`为`RANDOM_PORT`和`DEFINED_PORT`时，默认可以注入`TestRestTemplate`或`WebTestClient`。
 
 ### value或properties
 
@@ -42,7 +42,7 @@ public class DemoApplicationTests
 
 #### MOCK
 
-利用仿真Web容器，不会启动真正的Web容器
+利用仿真Web容器，不会启动真正的Web容器，默认值。
 
 #### RANDOM_PORT
 
@@ -99,21 +99,27 @@ public class WebfluxDemoApplicationTests {
 
 ## @WebMvcTest
 
-专门针对Spring MVC的测试，不会加载整个Spring容器，仅加载指定bean以及web层相关组件，`@Component`，`@Service`和`@Repository`等都不会加载，默认会注入`MockMvc`，如果Controller依赖其他比如@Service，则会报错（找不到相应bean）。结合@ContextConfiguration实例化上下文。
+专门针对`Spring MVC`的测试（参数传入待测试的`Controller`），不会加载整个Spring容器，仅加载指定bean以及web层相关组件，`@Component`，`@Service`和`@Repository`等都不会加载，默认会注入`MockMvc`，如果Controller依赖其他比如@Service，则会报错（找不到相应bean），通过`Mock`解决或Import相应的bean。结合@ContextConfiguration实例化上下文。
 
 ### 样例
 
 ```java
 @RunWith(SpringRunner.class)
 @WebMvcTest(HelloController.class)
+// 如果同包，可以省略如下@ContextConfiguration
 @ContextConfiguration(classes = ReadingListApplication.class)
 public class WebMvcTests {
 
     @Autowired
     private MockMvc mvc;
+    
+    @MockBean
+    private HelloService helloService;
 
     @Test
     public void testController() throws Throwable {
+        // 模拟hello
+        given(helloService.hello("Hello")).willReturn()
         // 模拟请求，并期望执行成功
         mvc.perform(MockMvcRequestBuilders.get("/hello")).andExpect(MockMvcResultMatchers.status().isOk());
 
@@ -124,11 +130,9 @@ public class WebMvcTests {
 }
 ```
 
-
-
 ## @AutoConfigureMockMvc
 
-开启`MockMvc`自动配置，默认会注入`MockMvc`，可以配合@SpringBootTest使用。
+开启`MockMvc`自动配置，默认可以注入`MockMvc`，可以配合@SpringBootTest使用。
 
 ### 样例
 
