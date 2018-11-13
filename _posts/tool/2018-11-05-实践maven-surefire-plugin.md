@@ -27,3 +27,6 @@ tags: maven tool maven-surefire-plugin
     <include>**/*TestCase.java</include>
 </includes>
 ```
+## report
+
+生成html格式的报告

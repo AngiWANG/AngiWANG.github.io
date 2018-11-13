@@ -43,3 +43,61 @@ SonarJava
 [chinese pack](https://github.com/SonarQubeCommunity/sonar-l10n-zh)
 
 [Android Lint](https://github.com/ofields/sonar-android)
+
+## JaCoCo
+
+SonarQube默认支持JaCoCo，从`jacoco.exec`和`jacoco-it.exec`【`sonar.jacoco.reportPaths`】生成测试覆盖相关数据。
+
+```shell
+$ mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install
+$ mvn sonar:sonar
+```
+
+参考[Usage of JaCoCo with SonarJava](https://docs.sonarqube.org/display/PLUG/Usage+of+JaCoCo+with+SonarJava)
+
+## spotbugs
+
+sonarcube从spotbugs生成的reports导入
+
+```xml
+<sonar.java.spotbugs.reportPaths>./target/spotbugsXml.xml</sonar.java.spotbugs.reportPaths>
+```
+
+
+
+```shell
+$ mvn clean package com.github.spotbugs:spotbugs-maven-plugin:spotbugs sonar:sonar
+```
+
+
+
+## PMD
+
+sonarcube从pmd生成的reports导入
+
+```xml
+<sonar.java.pmd.reportPaths>./target/pmd.xml</sonar.java.pmd.reportPaths>
+```
+
+
+
+```shell
+$ mvn clean package pmd:pmd sonar:sonar
+```
+
+
+
+## checkstyle
+
+sonarcube从checkstyle生成的reports导入
+
+```xml
+<sonar.java.checkstyle.reportPaths>./target/checkstyle-result.xml</sonar.java.checkstyle.reportPaths>
+```
+
+
+
+```shell
+$ mvn clean package checkstyle:checkstyle sonar:sonar
+```
+
