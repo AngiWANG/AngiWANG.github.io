@@ -194,3 +194,5 @@ inOrder.verify(mockedList).add("one");
 inOrder.verify(mockedList).add("two");
 ```
 
+## MockitoJUnitRunner
+

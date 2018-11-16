@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "实践MyBatis通用mapper"
-date: 2018-01-08 14:05:00 +0800
+date: 2018-01-17 14:05:00 +0800
 categories: Java
 tags: database jpa java mybatis mapper
 ---

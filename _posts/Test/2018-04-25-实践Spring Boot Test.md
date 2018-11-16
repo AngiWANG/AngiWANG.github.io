@@ -99,7 +99,7 @@ public class WebfluxDemoApplicationTests {
 
 ## @WebMvcTest
 
-专门针对`Spring MVC`的测试（参数传入待测试的`Controller`），不会加载整个Spring容器，仅加载指定bean以及web层相关组件，`@Component`，`@Service`和`@Repository`等都不会加载，默认会注入`MockMvc`，如果Controller依赖其他比如@Service，则会报错（找不到相应bean），通过`Mock`解决或Import相应的bean。结合@ContextConfiguration实例化上下文。
+专门针对`Spring MVC`的单元测试（参数传入待测试的`Controller`），不会加载整个Spring容器，仅加载指定bean以及web层相关组件，`@Component`，`@Service`和`@Repository`等都不会加载，默认会注入`MockMvc`，如果Controller依赖其他比如@Service，则会报错（找不到相应bean），通过`Mock`解决或Import相应的bean。结合@ContextConfiguration实例化上下文。
 
 ### 样例
 
@@ -133,6 +133,8 @@ public class WebMvcTests {
 ## @AutoConfigureMockMvc
 
 开启`MockMvc`自动配置，默认可以注入`MockMvc`，可以配合@SpringBootTest使用。
+
+会启动完整Spring容器，用于集成测试。
 
 ### 样例
 
