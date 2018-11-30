@@ -8,16 +8,25 @@ tags: IntelliJ-IDEA tool java
 
 
 
+## 注册
+
+1、设置hosts
+
+0.0.0.0 account.jetbrains.com
+
+2、访问http://idea.lanyus.com/，获得注册码
+
+3、在idea里面输入注册码
+
+## 配置
+
 Theme: Darcula
 
 Font: Source Code Pro
 
-Size: 18
+Size: 16
 
-Line spacing: 1.2
-
-
-[IntelliJ IDEA 注册码](http://idea.lanyus.com/)
+Line spacing: 1.0
 
 ### 快捷键
 

@@ -17,3 +17,14 @@ tags: spring-boot spring-boot-devtools spring
 </dependency>
 ```
 
+## Eclipse
+
+Eclipse设置了自动编译之后，修改类它会自动编译。
+
+## IDEA
+
+IDEA在非RUN或DEBUG情况下才会自动编译（需要设置Auto-Compile）。
+
+勾选Build project automatically
+
+Shift+Ctrl+Alt+/，选择Registry，然后勾选compiler.automake.allow.when.app.running
