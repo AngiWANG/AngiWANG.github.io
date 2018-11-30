@@ -198,14 +198,14 @@ public class ServerProperties {
 第二种：绑定到@Bean，一般用于第三方Properties类【他们没有被@ConfigurationProperties注解】，例如：
 
 ```java
-@ConfigurationProperties(prefix = "foo")
 @Bean
+@ConfigurationProperties(prefix = "foo")
 public ServerProperties createServerProperties() {
     ...
 }
 ```
 
-第三种：参见[@EnableConfigurationProperties](http://angi.wang/2017/08/06/实践Spring-Enable系列之EnableConfigurationProperties.html)
+第三种：参见[@EnableConfigurationProperties](http://angiwang.github.io/2017/08/06/实践Spring-Enable系列之EnableConfigurationProperties.html)
 
 ### 属性占位符
 

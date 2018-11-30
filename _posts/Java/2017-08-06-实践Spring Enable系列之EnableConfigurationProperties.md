@@ -14,3 +14,25 @@ tags: spring property
 @EnableConfigurationProperties(ServerProperties.class)
 ```
 
+
+
+```java
+@ConfigurationProperties(prefix="my")
+public class ServerProperties {
+    private String name;
+    private Integer port;
+    private List<String> servers = new ArrayList<String>();
+
+    public String geName(){
+        return this.name;
+    }
+
+    public Integer gePort(){
+        return this.port;
+    }
+    public List<String> getServers() {
+        return this.servers;
+    }
+}
+```
+

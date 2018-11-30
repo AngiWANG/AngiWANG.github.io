@@ -6,8 +6,9 @@ categories: Java
 tags: database MyBatis MyBatis-Spring-Boot-Starter JDBC ORM
 ---
 
-
 [MyBatis-Spring-Boot-Starter](http://www.mybatis.org/spring-boot-starter/)，有助于快速构建基于MyBatis的Spring Boot应用。
+
+MyBatis自动配置类`MybatisAutoConfiguration`
 
 自动发现DataSource
 

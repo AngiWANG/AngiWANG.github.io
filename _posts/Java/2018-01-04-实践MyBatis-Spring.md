@@ -6,11 +6,9 @@ categories: Java
 tags: database MyBatis MyBatis-Spring JDBC ORM
 ---
 
-## MyBatis Spring
-
 [MyBatis-Spring](http://www.mybatis.org/spring/)
 
-### SqlSessionFactoryBean
+## SqlSessionFactoryBean
 
 ```xml
 <bean id = "sqlSessionFactory" class = "org.mybatis.spring.SqlSessionFactoryBean">
@@ -31,7 +29,7 @@ mapperLocations：支持通配符，比如：`classpath*:sqlmap/*-mapper.xml"`
 
 mybatis配置文件中<environments>会被忽略。
 
-### SqlSessionTemplate
+## SqlSessionTemplate
 
 SqlSession的一种实现，使用了代理模式，线程安全，由于每次都获取新的SQLSession，因而不支持一级缓存
 
@@ -61,7 +59,7 @@ public class UserDaoImpl implements UserDao {
 
 
 
-### SqlSessionDaoSupport
+## SqlSessionDaoSupport
 
 ```java
 public class UserDaoImpl extends SqlSessionDaoSupport implements UserDao {
@@ -81,14 +79,14 @@ public class UserDaoImpl extends SqlSessionDaoSupport implements UserDao {
 
 
 
-### MapperFactoryBean
+## MapperFactoryBean
 
 Spring中定义Mapper，线程安全，每次都获取新的SQLSession
 
 ```xml
-<bean id = "userMapper" class = "org.mybatis.spring.mapper.MapperFactoryBean">
-	<property name = "mapperInterface" value = "org.mybatis.spring.sample.mapper.UserMapper"/>
-  	<property name = "sqlSessionFactory" ref= "sqlSessionFactory" />
+<bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	<property name="mapperInterface" value="org.mybatis.spring.sample.mapper.UserMapper"/>
+  	<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 </bean>
 ```
 
@@ -121,13 +119,11 @@ public abstract class SqlSessionDaoSupport extends DaoSupport {
 }
 ```
 
-
-
-### Mapper Scan
+## Mapper Scan
 
 基于扫描自动生产Mapper
 
-`base-package`：
+`base-package`：扫描Mapper的基础包，支持Ant匹配
 
 `factory-ref` or `template-ref`：
 
@@ -137,7 +133,7 @@ public abstract class SqlSessionDaoSupport extends DaoSupport {
 
 **NOTE**：`<context:component-scan/>`  won't be able to scan and register mappers. Mappers are interfaces and, in order to register them to Spring, the scanner must know how to create a `MapperFactoryBean` for each interface it finds. 
 
-#### `<mybatis:scan/>`
+### `<mybatis:scan/>`
 
 类似`<context:component-scan/>`
 
@@ -145,7 +141,7 @@ public abstract class SqlSessionDaoSupport extends DaoSupport {
 <mybatis:scan base-package="org.mybatis.spring.sample.mapper" />
 ```
 
-#### @MapperScan
+### @MapperScan
 
 ```java
 @Configuration
@@ -166,7 +162,7 @@ public class AppConfig {
 }
 ```
 
-#### MapperScannerConfigurer
+### MapperScannerConfigurer
 
 推荐使用`sqlSessionFactoryBean`和`sqlSessionTemplateBean`，如果没有显示注入，由于开启了按类型自动注入，则会自动注入，参见如下源代码：
 

@@ -100,6 +100,14 @@ bean定义
 @Scope("prototype")
 ```
 
+### @Primary
+
+首选bean
+
+### @Qulifier
+
+指定注入那个bean
+
 ### 依赖注入
 
 1. 引用方法注入
