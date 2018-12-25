@@ -115,7 +115,7 @@ public CompletionStage<T> exceptionally    (Function<Throwable, ? extends T> fn)
 
 #### *Asnyc
 
-上送方法（不以`Async`结尾）默认继续在上一个异步任务执行线程中执行，而其对应的以`Async`结尾的方法，会使用`默认Executor`来执行，可能与上一个异步任务线程不同，即使共用相同的线程池，线程池调度存在不确定性。
+上述方法（不以`Async`结尾）默认继续在上一个异步任务执行线程中执行，而其对应的以`Async`结尾的方法，会使用`默认Executor`来执行，可能与上一个异步任务线程不同，即使共用相同的线程池，线程池调度存在不确定性。
 
 例如：
 

@@ -8,7 +8,7 @@ tags: java Spring-MVC Async
 
 
 
-## 样例
+## 样例一
 
 web.xml
 
@@ -29,9 +29,7 @@ web.xml
 </web-app>
 ```
 
-
-
-
+HelloWorldController.java
 
 ```java
 @Controller
@@ -101,6 +99,39 @@ public class HelloWorldController {
 
 可见worker线程在AysncServlet下不是一直占用至Servlet结束，这样一个worker线程可以服务于多个请求。
 
+## 样例二
+
+```java
+@Controller
+public class ShowMessageController {
+
+	Logger logger = LoggerFactory.getLogger(ShowMessageController.class);
+	
+	@RequestMapping("/showMessage")
+	public DeferredResult<ModelAndView> showMessage() {
+		final DeferredResult<ModelAndView> deferredResult = new DeferredResult<ModelAndView>(30 * 1000);
+
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(10 * 1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				ModelAndView modelAndView = new ModelAndView();
+				modelAndView.setViewName("showMessage");
+				modelAndView.addObject("message", "Hello, World!");
+				deferredResult.setResult(modelAndView);
+			}
+
+		}).start();
+		return deferredResult;
+	}
+}
+```
+
 ## DeferredResult
 
 
@@ -112,7 +143,7 @@ public DeferredResult(Long timeout, Object timeoutResult) {
 }
 ```
 
-默认`timeoutResult`是`new Object()`
+默认`timeout`是null，`timeoutResult`是`new Object()`
 
 ## setResult(T result)
 

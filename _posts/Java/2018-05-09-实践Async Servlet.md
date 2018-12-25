@@ -6,7 +6,7 @@ categories: Java
 tags: java Async-Servlet Servlet
 ---
 
-
+Servlet3.0新增异步Servlet，将Servlet线程和业务线程分离。
 
 ## 样例
 
@@ -91,3 +91,25 @@ public class AsyncServlet extends HttpServlet {
 ![AsyncServlet](/images/AsyncServlet.png)
 
 可见worker线程在AysncServlet下不是一直占用至Servlet结束，这样一个worker线程可以服务于多个请求。
+
+## AsyncContext
+
+`javax.servlet.ServletRequest#startAsync()`
+
+### setTimeout
+
+### start
+
+### complete
+
+## AsyncListner
+
+```java
+public interface AsyncListener extends EventListener {
+    void onComplete(AsyncEvent event) throws IOException;
+    void onTimeout(AsyncEvent event) throws IOException;
+    void onError(AsyncEvent event) throws IOException;
+    void onStartAsync(AsyncEvent event) throws IOException;
+}
+```
+
