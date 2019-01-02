@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "实践Nginx"
-date: 2018-07-10 09:50:00 +0800
+title: "实践Shell脚步修改Nginx upstream配置文件"
+date: 2018-12-26 09:50:00 +0800
 categories: 网络
 tags: network nginx
 ---
