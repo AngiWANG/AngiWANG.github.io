@@ -6,6 +6,8 @@ categories: Java
 tags: java HttpClient HttpComponents
 ---
 
+[HttpClient](http://hc.apache.org/)
+
 ### header
 
 PostMethod.setHeader(key,value)

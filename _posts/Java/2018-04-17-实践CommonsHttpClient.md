@@ -6,6 +6,8 @@ categories: Java
 tags: java CommonsHttpClient HttpClient HttpComponents
 ---
 
+[Commons HttpClient](http://hc.apache.org/httpclient-legacy/index.html)
+
 ### header
 
 addRequestHeader(key,value)
