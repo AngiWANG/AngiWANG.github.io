@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "实践Android"
+title: "实践Android Studio"
 date: 2019-01-06 09:03:13 +0800
 categories: 移动互联网
 tags: mobile Android
