@@ -26,6 +26,10 @@ BeanFactoryPostProcessor
 
 实例化bean的方法：实例工厂、静态工厂和构造器
 
+
+
+ApplicationContextAware
+
 ## 基于XML
 
 ### `<import/>`
